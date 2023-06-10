@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "baseUrl": "src",
+    "paths": {
+      "@aythink/assets/*": ["./assets/*"],
+      "@aythink/theme/*": ["./theme/*"]
+    }
+  },
+  "include": ["src"]
+}
