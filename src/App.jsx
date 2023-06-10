@@ -1,9 +1,11 @@
+import { useTranslation } from "react-i18next";
 import { Button } from "@mui/material";
 
 const App = () => {
+  const { t } = useTranslation();
   return (
     <div>
-      <Button>hellow</Button>
+      <Button>{t("header.title")}</Button>
     </div>
   );
 };
