@@ -3,7 +3,13 @@
     "baseUrl": "src",
     "paths": {
       "@fidyah/assets/*": ["./assets/*"],
-      "@fidyah/theme/*": ["./theme/*"]
+      "@fidyah/theme/*": ["./theme/*"],
+      "@fidyah/layouts/*": ["./layouts/*"],
+      "@fidyah/components/*": ["./components/*"],
+      "@fidyah/utils/*": ["./utils/*"],
+      "@fidyah/lib/*": ["./lib/*"],
+      "@fidyah/context/*": ["./context/*"],
+      "@fidyah/hooks/*": ["./hooks/*"]
     }
   },
   "include": ["src"]

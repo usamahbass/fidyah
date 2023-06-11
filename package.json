@@ -12,7 +12,9 @@
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "^5.11.16",
     "@mui/material": "^5.13.4",
+    "@mui/styles": "^5.13.2",
     "i18next": "^22.5.1",
     "i18next-http-backend": "^2.2.1",
     "prop-types": "^15.8.1",

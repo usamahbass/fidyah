@@ -1,12 +1,13 @@
-import { useTranslation } from "react-i18next";
-import { Button } from "@mui/material";
+import FidyahLayout from "./layouts";
+import Header from "./layouts/Header";
+import HeroSection from "./components/HeroSection/HeroSection";
 
 const App = () => {
-  const { t } = useTranslation();
   return (
-    <div>
-      <Button>{t("header.title")}</Button>
-    </div>
+    <FidyahLayout>
+      <Header />
+      <HeroSection />
+    </FidyahLayout>
   );
 };
 

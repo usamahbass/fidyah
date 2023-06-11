@@ -1,4 +1,9 @@
 {
-  "header.title": "Fidyah",
-  "header.description": "Make fidyah payment for your missed fasts during past ramadhan"
+  "header.title": "Fidyah Calculator",
+  "header.description": "Make fidyah payment for your missed fasts during past ramadhan",
+  "settings.title": "Settings",
+  "settings.language.title": "Language",
+  "settings.theme.title": "Theme",
+  "settings.theme.light": "Light",
+  "settings.theme.dark": "Dark"
 }

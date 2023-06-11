@@ -1,4 +1,9 @@
 {
-  "header.title": "Fidyah",
-  "header.description": "Lakukan pembayaran fidyah untuk puasa yang terlewat selama ramadhan yang lalu"
+  "header.title": "Kalkulator Fidyah",
+  "header.description": "Lakukan pembayaran fidyah untuk puasa yang terlewat selama ramadhan yang lalu",
+  "settings.title": "Pengaturan",
+  "settings.language.title": "Bahasa",
+  "settings.theme.title": "Tema",
+  "settings.theme.light": "Terang",
+  "settings.theme.dark": "Gelap"
 }
