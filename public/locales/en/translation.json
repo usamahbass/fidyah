@@ -1,0 +1,23 @@
+{
+  "header.title": "Fidyah Calculator",
+  "header.description": "Make fidyah payment for your missed fasts during past ramadhan",
+  "settings.title": "Settings",
+  "settings.language.title": "Language",
+  "settings.theme.title": "Theme",
+  "settings.currency.title": "Currency",
+  "settings.theme.light": "Light",
+  "settings.theme.dark": "Dark",
+  "form.headerleft.title": "Haid or Other Reason",
+  "form.headerleft.description": "Days to Qadha'",
+  "form.headerright.title": "Total Payable",
+  "general.year": "Year",
+  "form.yearnotfasting": "Year not fasting",
+  "form.noofdays": "No of days",
+  "form.quantity": "Quantity",
+  "form.amount": "Amount payable",
+  "general.select": "Select",
+  "general.addyear": "Add Year",
+  "general.deleteyear": "Delete Year",
+  "general.days": "Days"
+
+}

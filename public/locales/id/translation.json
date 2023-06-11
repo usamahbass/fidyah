@@ -1,0 +1,22 @@
+{
+  "header.title": "Kalkulator Fidyah",
+  "header.description": "Lakukan pembayaran fidyah untuk puasa yang terlewat selama ramadhan yang lalu",
+  "settings.title": "Pengaturan",
+  "settings.language.title": "Bahasa",
+  "settings.theme.title": "Tema",
+  "settings.currency.title": "Mata Uang",
+  "settings.theme.light": "Terang",
+  "settings.theme.dark": "Gelap",
+  "form.headerleft.title": "Haid atau Alasan Lainnya",
+  "form.headerleft.description": "Hari menuju Qadha'",
+  "form.headerright.title": "Total Hutang",
+  "general.year": "Tahun",
+  "form.yearnotfasting": "Tahun tidak puasa",
+  "form.noofdays": "Tidak ada hari",
+  "form.quantity": "Kuantitas",
+  "form.amount": "Jumlah yang harus dibayar",
+  "general.select": "Pilih",
+  "general.addyear": "Tambah Tahun",
+  "general.deleteyear": "Hapus Tahun",
+  "general.days": "Hari"
+}
