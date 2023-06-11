@@ -9,7 +9,9 @@
       "@fidyah/utils/*": ["./utils/*"],
       "@fidyah/lib/*": ["./lib/*"],
       "@fidyah/context/*": ["./context/*"],
-      "@fidyah/hooks/*": ["./hooks/*"]
+      "@fidyah/hooks/*": ["./hooks/*"],
+      "@fidyah/containers/*": ["./containers/*"],
+      "@fidyah/icons/*": ["./icons/*"]
     }
   },
   "include": ["src"]

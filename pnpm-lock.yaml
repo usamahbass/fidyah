@@ -18,6 +18,7 @@ specifiers:
   prop-types: ^15.8.1
   react: ^18.2.0
   react-dom: ^18.2.0
+  react-hook-form: ^7.44.3
   react-i18next: ^12.3.1
   vite: ^4.3.9
 
@@ -32,6 +33,7 @@ dependencies:
   prop-types: 15.8.1
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
+  react-hook-form: 7.44.3_react@18.2.0
   react-i18next: 12.3.1_spyi3zqm3bqfobczid2f6jym6y
 
 devDependencies:
@@ -2054,6 +2056,15 @@ packages:
       loose-envify: 1.4.0
       react: 18.2.0
       scheduler: 0.23.0
+    dev: false
+
+  /react-hook-form/7.44.3_react@18.2.0:
+    resolution: {integrity: sha512-/tHId6p2ViAka1wECMw8FEPn/oz/w226zehHrJyQ1oIzCBNMIJCaj6ZkQcv+MjDxYh9MWR7RQic7Qqwe4a5nkw==}
+    engines: {node: '>=12.22.0'}
+    peerDependencies:
+      react: ^16.8.0 || ^17 || ^18
+    dependencies:
+      react: 18.2.0
     dev: false
 
   /react-i18next/12.3.1_spyi3zqm3bqfobczid2f6jym6y:

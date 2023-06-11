@@ -14,9 +14,9 @@ import ListItemText from "@mui/material/ListItemText";
 import ListItemSecondaryAction from "@mui/material/ListItemSecondaryAction";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
-import { LANGUAGES, THEMES } from "@fidyah/utils/constants";
+import { CURRENCY, LANGUAGES, THEMES } from "@fidyah/utils/constants";
 import { useStore } from "@fidyah/hooks/useStore";
-import { setAppTheme } from "@fidyah/context/actions";
+import { setAppCurrency, setAppTheme } from "@fidyah/context/actions";
 
 const StyledBox = styled(Box)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "light" ? "#fff" : grey[800],
@@ -45,16 +45,16 @@ const DrawerSettings = ({
 
   const {
     dispatch,
-    state: { theme },
+    state: { theme, currency },
   } = useStore();
 
   // This is used only for the example
   const container =
     window !== undefined ? () => window.document.body : undefined;
 
-  const handleChangeTheme = (e) => dispatch(setAppTheme(e.target.value));
-
   const handleChangeLanguage = (e) => changeLanguage(e.target.value);
+  const handleChangeTheme = (e) => dispatch(setAppTheme(e.target.value));
+  const handleChangeCurrency = (e) => dispatch(setAppCurrency(e.target.value));
 
   const themeDataMapper = THEMES.LISTS.map((themeParam) => ({
     label: t(`settings.theme.${themeParam.value}`),
@@ -124,6 +124,7 @@ const DrawerSettings = ({
                       onChange={handleChangeTheme}
                       labelId="select-theme-label"
                       label={t("settings.theme.title")}
+                      placeholder={t("general.select")}
                     >
                       {themeDataMapper.map((theme, themeIdx) => (
                         <MenuItem
@@ -131,6 +132,30 @@ const DrawerSettings = ({
                           key={`${theme.value}-${themeIdx}`}
                         >
                           {theme.label}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </ListItemSecondaryAction>
+                </ListItem>
+
+                <ListItem>
+                  <ListItemText primary={t("settings.currency.title")} />
+
+                  <ListItemSecondaryAction>
+                    <Select
+                      size="small"
+                      value={currency}
+                      id="select-currency"
+                      onChange={handleChangeCurrency}
+                      labelId="select-currency-label"
+                      label={t("settings.currency.title")}
+                    >
+                      {CURRENCY.LISTS.map((curr, currIdx) => (
+                        <MenuItem
+                          value={curr.value}
+                          key={`${curr.value}-${currIdx}`}
+                        >
+                          {curr.label}
                         </MenuItem>
                       ))}
                     </Select>

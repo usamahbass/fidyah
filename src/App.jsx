@@ -1,13 +1,22 @@
-import FidyahLayout from "./layouts";
-import Header from "./layouts/Header";
-import HeroSection from "./components/HeroSection/HeroSection";
+import { lazy, Suspense } from "react";
+import LoadingGlobal from "./components/Loading/LoadingGlobal";
+
+const FidyahLayout = lazy(() => import("./layouts"));
+const Header = lazy(() => import("./layouts/Header"));
+const HeroSection = lazy(() => import("./components/HeroSection/HeroSection"));
+const FidyahFormContainer = lazy(() =>
+  import("./containers/FidyahFormContainer")
+);
 
 const App = () => {
   return (
-    <FidyahLayout>
-      <Header />
-      <HeroSection />
-    </FidyahLayout>
+    <Suspense fallback={<LoadingGlobal />}>
+      <FidyahLayout>
+        <Header />
+        <HeroSection />
+        <FidyahFormContainer />
+      </FidyahLayout>
+    </Suspense>
   );
 };
 

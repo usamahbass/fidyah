@@ -23,3 +23,16 @@ export const THEMES = {
     },
   ],
 };
+
+export const CURRENCY = {
+  LISTS: [
+    {
+      label: "Rupiah",
+      value: "rp",
+    },
+    {
+      label: "Dollar",
+      value: "$",
+    },
+  ],
+};

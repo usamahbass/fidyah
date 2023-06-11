@@ -14,8 +14,7 @@ export const useLayoutStyles = makeStyles(() => ({
     width: "100%",
     position: "relative",
     margin: "0 auto",
-    border: "1px solid",
     // padding: "0px 16px 80px",
-    height: "100vh",
+    height: "100%",
   },
 }));
