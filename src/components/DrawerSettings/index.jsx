@@ -82,8 +82,7 @@ const DrawerSettings = ({
         disableSwipeToOpen={false}
         ModalProps={{
           keepMounted: true,
-        }}
-      >
+        }}>
         <StyledBox
           sx={{
             position: "absolute",
@@ -93,8 +92,7 @@ const DrawerSettings = ({
             visibility: "visible",
             right: 0,
             left: 0,
-          }}
-        >
+          }}>
           <Puller />
           <Box>
             <Typography
@@ -103,16 +101,14 @@ const DrawerSettings = ({
                 color: "secondary",
                 fontWeight: 700,
                 fontSize: "1.2rem",
-              }}
-            >
+              }}>
               {t("settings.title")}
             </Typography>
             <Divider />
 
             <Box mt=".5rem">
               <List
-                sx={{ gap: ".5rem", display: "flex", flexDirection: "column" }}
-              >
+                sx={{ gap: ".5rem", display: "flex", flexDirection: "column" }}>
                 <ListItem>
                   <ListItemText primary={t("settings.theme.title")} />
 
@@ -124,13 +120,11 @@ const DrawerSettings = ({
                       onChange={handleChangeTheme}
                       labelId="select-theme-label"
                       label={t("settings.theme.title")}
-                      placeholder={t("general.select")}
-                    >
+                      placeholder={t("general.select")}>
                       {themeDataMapper.map((theme, themeIdx) => (
                         <MenuItem
                           value={theme.value}
-                          key={`${theme.value}-${themeIdx}`}
-                        >
+                          key={`${theme.value}-${themeIdx}`}>
                           {theme.label}
                         </MenuItem>
                       ))}
@@ -148,13 +142,11 @@ const DrawerSettings = ({
                       id="select-currency"
                       onChange={handleChangeCurrency}
                       labelId="select-currency-label"
-                      label={t("settings.currency.title")}
-                    >
+                      label={t("settings.currency.title")}>
                       {CURRENCY.LISTS.map((curr, currIdx) => (
                         <MenuItem
                           value={curr.value}
-                          key={`${curr.value}-${currIdx}`}
-                        >
+                          key={`${curr.value}-${currIdx}`}>
                           {curr.label}
                         </MenuItem>
                       ))}
@@ -172,13 +164,11 @@ const DrawerSettings = ({
                       id="select-language"
                       onChange={handleChangeLanguage}
                       labelId="select-language-label"
-                      label={t("settings.language.title")}
-                    >
+                      label={t("settings.language.title")}>
                       {LANGUAGES.LISTS.map((lang, langIdx) => (
                         <MenuItem
                           value={lang.value}
-                          key={`${lang.value}-${langIdx}`}
-                        >
+                          key={`${lang.value}-${langIdx}`}>
                           {lang.label}
                         </MenuItem>
                       ))}
