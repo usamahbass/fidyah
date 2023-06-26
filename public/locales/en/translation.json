@@ -3,8 +3,11 @@
   "header.description": "Make fidyah payment for your missed fasts during past ramadhan",
   "settings.title": "Settings",
   "settings.language.title": "Language",
+  "settings.language.description": "Choose a language according to your preference",
   "settings.theme.title": "Theme",
+  "settings.theme.description": "Choose a theme according to your preference",
   "settings.currency.title": "Currency",
+  "settings.currency.description": "Choose a currency according to your preference",
   "settings.theme.light": "Light",
   "settings.theme.dark": "Dark",
   "form.headerleft.title": "Haid or Other Reason",
@@ -18,6 +21,6 @@
   "general.select": "Select",
   "general.addyear": "Add Year",
   "general.deleteyear": "Delete Year",
-  "general.days": "Days"
-
+  "general.days": "Days",
+  "general.close": "Close"
 }

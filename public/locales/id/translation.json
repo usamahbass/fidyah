@@ -3,8 +3,11 @@
   "header.description": "Lakukan pembayaran fidyah untuk puasa yang terlewat selama ramadhan yang lalu",
   "settings.title": "Pengaturan",
   "settings.language.title": "Bahasa",
+  "settings.language.description": "Pilih bahasa sesuai preferensi anda",
   "settings.theme.title": "Tema",
+  "settings.theme.description": "Pilih tema sesuai preferensi anda",
   "settings.currency.title": "Mata Uang",
+  "settings.currency.description": "Pilih mata uang sesuai preferensi anda",
   "settings.theme.light": "Terang",
   "settings.theme.dark": "Gelap",
   "form.headerleft.title": "Haid atau Alasan Lainnya",
@@ -18,5 +21,6 @@
   "general.select": "Pilih",
   "general.addyear": "Tambah Tahun",
   "general.deleteyear": "Hapus Tahun",
-  "general.days": "Hari"
+  "general.days": "Hari",
+  "general.close": "Tutup"
 }
