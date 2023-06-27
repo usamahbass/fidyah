@@ -12,7 +12,6 @@
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
-    "@material-ui/core": "^4.12.4",
     "@mui/icons-material": "^5.11.16",
     "@mui/material": "^5.13.4",
     "@mui/styles": "^5.13.2",
@@ -25,8 +24,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.44.3",
-    "react-i18next": "^12.3.1",
-    "react-pwa-install": "^1.0.12"
+    "react-i18next": "^12.3.1"
   },
   "devDependencies": {
     "@types/react": "^18.0.37",
