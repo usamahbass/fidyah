@@ -3,14 +3,14 @@ export const overrides = {
     defaultProps: {
       style: {
         boxShadow: "none",
-        fontFamily: `"Nunito", serif`,
+        fontFamily: `"Poppins", sans-serif`,
       },
     },
   },
   MuiTypography: {
     defaultProps: {
       style: {
-        fontFamily: `"Nunito", serif`,
+        fontFamily: `"Poppins", sans-serif`,
       },
     },
   },

@@ -22,17 +22,47 @@ export const THEMES = {
       value: "dark",
     },
   ],
+  DARK: "dark",
+  LIGHT: "light",
 };
 
 export const CURRENCY = {
   LISTS: [
-    {
-      label: "Rupiah",
-      value: "rp",
-    },
+    // {
+    //   label: "Rupiah",
+    //   value: "rp",
+    // },
     {
       label: "Dollar",
       value: "$",
     },
   ],
+  RUPIAH: "rp",
+  DOLLAR: "$",
 };
+
+export const DEVELOPERS = [
+  {
+    name: "Usamah Basalamah",
+    role: "Frontend Developer",
+    github: "https://github.com/usamahbass",
+  },
+  {
+    name: "Muhammad Nouval Alkaff",
+    role: "Backend Developer",
+    github: "https://github.com/nouvalkaff",
+  },
+];
+
+export const REPOSITORIES = [
+  {
+    name: "UI",
+    role: "Frontend Developer",
+    github: "https://github.com/usamahbass/fidyah",
+  },
+  {
+    name: "API",
+    role: "Backend Developer",
+    github: "https://github.com/nouvalkaff/fidyahCalculator",
+  },
+];

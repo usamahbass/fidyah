@@ -1,9 +1,8 @@
 import PropTypes from "prop-types";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
-import Select from "@mui/material/Select";
+import NativeSelect from "@mui/material/NativeSelect";
 import Divider from "@mui/material/Divider";
-import MenuItem from "@mui/material/MenuItem";
 import Typography from "@mui/material/Typography";
 import FormControl from "@mui/material/FormControl";
 import Button from "@mui/material/Button";
@@ -14,45 +13,42 @@ import Collapse from "@mui/material/Collapse";
 import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 import Tooltip from "@mui/material/Tooltip";
 import { useTranslation } from "react-i18next";
-import FidyahFormHeader from "./FidyahFormHeader";
 import { useFidyahFormStyles } from "./_styles";
-import { generateYears, sumArrayOfObject } from "@fidyah/utils/helpers";
+import { generateYears } from "@fidyah/utils/helpers";
 import CounterForm from "../CounterForm/CounterForm";
 import { Controller } from "react-hook-form";
+import ResetIcon from "@mui/icons-material/Refresh";
 
 const FidyahForm = ({
   fields,
   control,
   handleAddYear,
   handleDeleteYear,
+  headerElement,
   watch,
+  handleResetForm,
 }) => {
   const { t } = useTranslation();
   const classes = useFidyahFormStyles();
 
-  const currentData = watch("data");
-
-  const sumTotalDaysInData = sumArrayOfObject(currentData, "days");
-
   return (
     <Box className={classes.container}>
-      <FidyahFormHeader daysCount={sumTotalDaysInData} />
-
+      {headerElement}
       <Box className={classes.formContent}>
         <Stack spacing={3}>
           {fields.map((field, fieldIdx) => {
             const watchCurrentYearValue = watch(`data.${fieldIdx}.year`);
             const watchCurrentDayValue = watch(`data.${fieldIdx}.days`);
 
+            const quantityValue =
+              watchCurrentDayValue === 0 ? "-" : watchCurrentDayValue;
+
             return (
-              <Collapse
-                mountOnEnter
-                unmountOnExit
-                key={field.id}
-                in={fields[fieldIdx]}
-              >
+              <Collapse mountOnEnter unmountOnExit key={field.id} in>
                 <Stack spacing={3}>
                   <Stack spacing={3}>
+                    {/* HEADER CONTENT */}
+
                     <Stack alignItems="center" direction="row" spacing={1}>
                       <Typography variant="body2" fontWeight={800}>
                         {t("general.year").toUpperCase()} {fieldIdx + 1}
@@ -63,27 +59,26 @@ const FidyahForm = ({
                           <IconButton
                             size="small"
                             color="error"
-                            onClick={() => handleDeleteYear(fieldIdx)}
-                          >
+                            onClick={() => handleDeleteYear(fieldIdx)}>
                             <RemoveCircleIcon />
                           </IconButton>
                         </Tooltip>
                       )}
                     </Stack>
 
+                    {/* FORM */}
+
                     <Stack alignItems="center" spacing={3} direction="row">
                       <FormControl
-                        sx={{ width: "30%" }}
+                        sx={{ width: "50%" }}
                         component={Stack}
-                        spacing={1}
-                      >
+                        spacing={1}>
                         <FormLabel
+                          className={classes.formLabel}
                           sx={{
                             fontSize: ".75rem",
-                            color: "#333",
                             fontWeight: 600,
-                          }}
-                        >
+                          }}>
                           {t("form.yearnotfasting")}
                         </FormLabel>
                         <Controller
@@ -91,8 +86,7 @@ const FidyahForm = ({
                           rules={{ required: true }}
                           name={`data.${fieldIdx}.year`}
                           render={({ field: { onChange, value } }) => (
-                            <Select
-                              size="small"
+                            <NativeSelect
                               value={value}
                               displayEmpty
                               id="select-year"
@@ -105,36 +99,30 @@ const FidyahForm = ({
                                 }
 
                                 return selected;
-                              }}
-                            >
-                              <MenuItem disabled value="">
+                              }}>
+                              <option disabled value="">
                                 {t("general.select")}
-                              </MenuItem>
+                              </option>
                               {generateYears().map((year, yearIdx) => (
-                                <MenuItem
-                                  value={year}
-                                  key={`${year}-${yearIdx}`}
-                                >
+                                <option value={year} key={`${year}-${yearIdx}`}>
                                   {year}
-                                </MenuItem>
+                                </option>
                               ))}
-                            </Select>
+                            </NativeSelect>
                           )}
                         />
                       </FormControl>
 
                       <FormControl
-                        sx={{ width: "40%" }}
+                        sx={{ width: "50%" }}
                         component={Stack}
-                        spacing={1}
-                      >
+                        spacing={1}>
                         <FormLabel
+                          className={classes.formLabel}
                           sx={{
                             fontSize: ".75rem",
-                            color: "#333",
                             fontWeight: 600,
-                          }}
-                        >
+                          }}>
                           {t("form.noofdays")}
                         </FormLabel>
 
@@ -151,59 +139,57 @@ const FidyahForm = ({
                           )}
                         />
                       </FormControl>
+                    </Stack>
 
+                    <Stack alignItems="center" spacing={3} direction="row">
                       <FormControl
-                        sx={{ width: "25%" }}
+                        sx={{ width: "50%" }}
                         component={Stack}
-                        spacing={1}
-                      >
+                        spacing={1}>
                         <FormLabel
+                          className={classes.formLabel}
                           sx={{
                             fontSize: ".75rem",
-                            color: "#333",
                             fontWeight: 600,
-                          }}
-                        >
+                          }}>
                           {t("form.quantity")}
                         </FormLabel>
 
                         <Typography
                           color="primary"
                           variant="h6"
-                          fontWeight={800}
-                        >
-                          {watchCurrentDayValue === 0
-                            ? "-"
-                            : watchCurrentDayValue}
+                          fontWeight={800}>
+                          {quantityValue}
+                        </Typography>
+                      </FormControl>
+
+                      <FormControl
+                        component={Stack}
+                        spacing={1}
+                        sx={{
+                          width: "50%",
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                        }}>
+                        <FormLabel
+                          className={classes.formLabel}
+                          sx={{
+                            fontSize: ".75rem",
+                            fontWeight: 600,
+                          }}>
+                          {t("form.amount")}
+                        </FormLabel>
+
+                        <Typography
+                          color="primary"
+                          variant="h6"
+                          fontWeight={800}>
+                          -
                         </Typography>
                       </FormControl>
                     </Stack>
                   </Stack>
-
-                  <FormControl
-                    component={Stack}
-                    spacing={1}
-                    sx={{
-                      width: "100%",
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                    }}
-                  >
-                    <FormLabel
-                      sx={{
-                        fontSize: ".75rem",
-                        color: "#333",
-                        fontWeight: 600,
-                      }}
-                    >
-                      {t("form.amount")}
-                    </FormLabel>
-
-                    <Typography color="primary" variant="h6" fontWeight={800}>
-                      -
-                    </Typography>
-                  </FormControl>
 
                   <Divider />
                 </Stack>
@@ -212,24 +198,41 @@ const FidyahForm = ({
           })}
         </Stack>
 
-        <Button
-          onClick={handleAddYear}
-          startIcon={<AddIcon />}
-          sx={{ marginTop: "1rem", fontWeight: 800 }}
-        >
-          {t("general.addyear")}
-        </Button>
+        <Stack
+          direction="row"
+          alignItems="center"
+          justifyContent="space-between">
+          <Button
+            color="warning"
+            variant="text"
+            onClick={handleAddYear}
+            startIcon={<AddIcon />}
+            sx={{ marginTop: "1rem", fontWeight: 800 }}>
+            {t("general.addyear")}
+          </Button>
+
+          <Button
+            color="error"
+            variant="text"
+            onClick={handleResetForm}
+            startIcon={<ResetIcon />}
+            sx={{ marginTop: "1rem", fontWeight: 800 }}>
+            {t("general.reset")}
+          </Button>
+        </Stack>
       </Box>
     </Box>
   );
 };
 
 FidyahForm.propTypes = {
-  watch: PropTypes.func,
   control: PropTypes.func.isRequired,
   fields: PropTypes.array.isRequired,
   handleAddYear: PropTypes.func.isRequired,
   handleDeleteYear: PropTypes.func.isRequired,
+  headerElement: PropTypes.node,
+  watch: PropTypes.func,
+  handleResetForm: PropTypes.func,
 };
 
 export default FidyahForm;

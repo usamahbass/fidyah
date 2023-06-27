@@ -5,6 +5,9 @@ import { grey } from "@mui/material/colors";
 import PropTypes from "prop-types";
 import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
+import Stack from "@mui/material/Stack";
+import IconButton from "@mui/material/IconButton";
+import CloseIcon from "@mui/icons-material/Close";
 import Typography from "@mui/material/Typography";
 import CssBaseline from "@mui/material/CssBaseline";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
@@ -12,11 +15,11 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import ListItemSecondaryAction from "@mui/material/ListItemSecondaryAction";
-import Select from "@mui/material/Select";
-import MenuItem from "@mui/material/MenuItem";
+import NativeSelect from "@mui/material/NativeSelect";
 import { CURRENCY, LANGUAGES, THEMES } from "@fidyah/utils/constants";
 import { useStore } from "@fidyah/hooks/useStore";
 import { setAppCurrency, setAppTheme } from "@fidyah/context/actions";
+import { Tooltip } from "@mui/material";
 
 const StyledBox = styled(Box)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "light" ? "#fff" : grey[800],
@@ -82,8 +85,7 @@ const DrawerSettings = ({
         disableSwipeToOpen={false}
         ModalProps={{
           keepMounted: true,
-        }}
-      >
+        }}>
         <StyledBox
           sx={{
             position: "absolute",
@@ -93,96 +95,100 @@ const DrawerSettings = ({
             visibility: "visible",
             right: 0,
             left: 0,
-          }}
-        >
+          }}>
           <Puller />
           <Box>
-            <Typography
-              sx={{
-                p: 2,
-                color: "secondary",
-                fontWeight: 700,
-                fontSize: "1.2rem",
-              }}
-            >
-              {t("settings.title")}
-            </Typography>
+            <Stack p={2} alignItems="center" spacing={2} direction="row">
+              <Tooltip title={t("general.close")}>
+                <IconButton onClick={onCloseDrawer}>
+                  <CloseIcon />
+                </IconButton>
+              </Tooltip>
+
+              <Typography
+                sx={{
+                  color: "secondary",
+                  fontWeight: 700,
+                  fontSize: "1.2rem",
+                }}>
+                {t("settings.title")}
+              </Typography>
+            </Stack>
             <Divider />
 
             <Box mt=".5rem">
               <List
-                sx={{ gap: ".5rem", display: "flex", flexDirection: "column" }}
-              >
+                sx={{ gap: ".5rem", display: "flex", flexDirection: "column" }}>
                 <ListItem>
-                  <ListItemText primary={t("settings.theme.title")} />
+                  <ListItemText
+                    primary={t("settings.theme.title")}
+                    secondary={t("settings.theme.description")}
+                  />
 
                   <ListItemSecondaryAction>
-                    <Select
-                      size="small"
+                    <NativeSelect
                       value={theme}
                       id="select-theme"
                       onChange={handleChangeTheme}
                       labelId="select-theme-label"
                       label={t("settings.theme.title")}
-                      placeholder={t("general.select")}
-                    >
+                      placeholder={t("general.select")}>
                       {themeDataMapper.map((theme, themeIdx) => (
-                        <MenuItem
+                        <option
                           value={theme.value}
-                          key={`${theme.value}-${themeIdx}`}
-                        >
+                          key={`${theme.value}-${themeIdx}`}>
                           {theme.label}
-                        </MenuItem>
+                        </option>
                       ))}
-                    </Select>
+                    </NativeSelect>
                   </ListItemSecondaryAction>
                 </ListItem>
 
                 <ListItem>
-                  <ListItemText primary={t("settings.currency.title")} />
+                  <ListItemText
+                    primary={t("settings.currency.title")}
+                    secondary={t("settings.currency.description")}
+                  />
 
                   <ListItemSecondaryAction>
-                    <Select
-                      size="small"
+                    <NativeSelect
                       value={currency}
                       id="select-currency"
                       onChange={handleChangeCurrency}
                       labelId="select-currency-label"
-                      label={t("settings.currency.title")}
-                    >
+                      label={t("settings.currency.title")}>
                       {CURRENCY.LISTS.map((curr, currIdx) => (
-                        <MenuItem
+                        <option
                           value={curr.value}
-                          key={`${curr.value}-${currIdx}`}
-                        >
+                          key={`${curr.value}-${currIdx}`}>
                           {curr.label}
-                        </MenuItem>
+                        </option>
                       ))}
-                    </Select>
+                    </NativeSelect>
                   </ListItemSecondaryAction>
                 </ListItem>
 
                 <ListItem>
-                  <ListItemText primary={t("settings.language.title")} />
+                  <ListItemText
+                    primary={t("settings.language.title")}
+                    secondary={t("settings.language.description")}
+                  />
 
                   <ListItemSecondaryAction>
-                    <Select
-                      size="small"
+                    <NativeSelect
                       value={language}
                       id="select-language"
                       onChange={handleChangeLanguage}
                       labelId="select-language-label"
-                      label={t("settings.language.title")}
-                    >
+                      label={t("settings.language.title")}>
                       {LANGUAGES.LISTS.map((lang, langIdx) => (
-                        <MenuItem
+                        <option
                           value={lang.value}
-                          key={`${lang.value}-${langIdx}`}
-                        >
+                          key={`${lang.value}-${langIdx}`}>
                           {lang.label}
-                        </MenuItem>
+                        </option>
                       ))}
-                    </Select>
+                    </NativeSelect>
                   </ListItemSecondaryAction>
                 </ListItem>
               </List>
