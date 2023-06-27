@@ -4,41 +4,84 @@ import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import PaymentsOutlinedIcon from "@mui/icons-material/PaymentsOutlined";
-import EventAvailableOutlinedIcon from "@mui/icons-material/EventAvailableOutlined";
+import Skeleton from "@mui/material/Skeleton";
 import { useFidyahFormStyles } from "./_styles";
+import { useStore } from "@fidyah/hooks/useStore";
+import replace from "lodash/replace";
+import toInteger from "lodash/toInteger";
+import { CURRENCY } from "@fidyah/utils/constants";
+import { toRupiah } from "@fidyah/utils/helpers";
 
-const FidyahFormHeader = ({ daysCount }) => {
+const handleFormattingTotalPayable = (totalPayable, currency) => {
+  const isRupiah = currency === CURRENCY.RUPIAH;
+
+  if (isRupiah) {
+    const replaceFromRP = replace(totalPayable, "Rp", "");
+    const toIntegerFromRP = toInteger(replaceFromRP);
+    return toRupiah(toIntegerFromRP);
+  }
+
+  return replace(totalPayable, "Rp", CURRENCY.DOLLAR);
+};
+
+const FidyahFormHeader = ({
+  icon,
+  title,
+  description,
+  daysCount,
+  totalPayable,
+  loadingPayable,
+}) => {
   const { t } = useTranslation();
+  const {
+    state: { currency },
+  } = useStore();
   const classes = useFidyahFormStyles();
+
+  const checkDaysCount = daysCount === 0 || daysCount || description;
+
+  const formattingTotalPayable = handleFormattingTotalPayable(
+    totalPayable,
+    currency
+  );
 
   return (
     <Box className={classes.header}>
       <Box className={classes.headerLeft}>
-        <EventAvailableOutlinedIcon fontSize="large" color="primary" />
+        {icon}
 
         <Stack>
           <Typography fontWeight={700} variant="body2">
-            {t("form.headerleft.title")}
+            {title}
           </Typography>
-          <Typography fontWeight={500} variant="caption">
-            {t("form.headerleft.description")}:{" "}
-            <Typography fontWeight={800} color="primary" variant="caption">
-              {daysCount} {t("general.days")}
+
+          {checkDaysCount && (
+            <Typography fontWeight={500} variant="caption">
+              {description}:{" "}
+              {daysCount && (
+                <Typography fontWeight={800} color="primary" variant="caption">
+                  {daysCount} {t("general.days")}
+                </Typography>
+              )}
             </Typography>
-          </Typography>
+          )}
         </Stack>
       </Box>
 
-      <Box className={classes.headerLeft}>
+      <Box className={classes.headerRight}>
         <PaymentsOutlinedIcon fontSize="large" color="primary" />
 
         <Stack>
           <Typography fontWeight={700} variant="body2">
             {t("form.headerright.title")}
           </Typography>
-          <Typography fontWeight={700} color="primary" variant="caption">
-            $100.000
-          </Typography>
+          {loadingPayable ? (
+            <Skeleton />
+          ) : (
+            <Typography fontWeight={700} color="primary" variant="caption">
+              {formattingTotalPayable}
+            </Typography>
+          )}
         </Stack>
       </Box>
     </Box>
@@ -50,7 +93,12 @@ FidyahFormHeader.defaultProps = {
 };
 
 FidyahFormHeader.propTypes = {
+  icon: PropTypes.node,
+  title: PropTypes.string,
+  description: PropTypes.string,
   daysCount: PropTypes.number,
+  totalPayable: PropTypes.number,
+  loadingPayable: PropTypes.bool,
 };
 
 export default FidyahFormHeader;
