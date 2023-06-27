@@ -13,9 +13,9 @@ import { setPayableHaid } from "@fidyah/context/actions";
 
 const FidyahFormHaidContainer = () => {
   const { t } = useTranslation();
-  const { control, watch, getValues } = useForm();
+  const { control, watch, getValues, reset: resetForm } = useForm();
   const { state, dispatch } = useStore();
-  const { fields, append, remove } = useFieldArray({
+  const { fields, append, remove, prepend } = useFieldArray({
     control,
     name: "data",
   });
@@ -30,6 +30,12 @@ const FidyahFormHaidContainer = () => {
 
   const handleDeleteYearForm = (fieldIdx) => remove(fieldIdx);
   const handleAddYearForm = () => append({ year: "", days: 0 });
+
+  const handleResetFormFidyahHaid = () => {
+    resetForm();
+    prepend({ year: "", days: 0 });
+    dispatch(setPayableHaid(0));
+  };
 
   const handleCalculateFidyahFormHaid = async (values) => {
     setLoadingCalculateFidyah(true);
@@ -79,6 +85,7 @@ const FidyahFormHaidContainer = () => {
       control={control}
       handleAddYear={handleAddYearForm}
       handleDeleteYear={handleDeleteYearForm}
+      handleResetForm={handleResetFormFidyahHaid}
       headerElement={
         <FidyahFormHeader
           totalPayable={haidTotal}

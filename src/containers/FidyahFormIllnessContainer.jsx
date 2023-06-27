@@ -12,8 +12,8 @@ import { setPayableIllness } from "@fidyah/context/actions";
 
 const FidyahFormIllnesContainer = () => {
   const { state, dispatch } = useStore();
-  const { control, watch, getValues } = useForm();
-  const { fields, append, remove } = useFieldArray({
+  const { control, watch, getValues, reset: resetForm } = useForm();
+  const { fields, append, remove, prepend } = useFieldArray({
     control,
     name: "data",
   });
@@ -28,6 +28,12 @@ const FidyahFormIllnesContainer = () => {
 
   const handleAddYearForm = () => append({ year: "", days: 0 });
   const handleDeleteYearForm = (fieldIdx) => remove(fieldIdx);
+
+  const handleResetFormFidyahIllness = () => {
+    resetForm();
+    prepend({ year: "", days: 0 });
+    dispatch(setPayableIllness(0));
+  };
 
   const handleCalculateFidyahFormIllness = async (values) => {
     setLoadingCalculateFidyah(true);
@@ -75,6 +81,7 @@ const FidyahFormIllnesContainer = () => {
       control={control}
       handleAddYear={handleAddYearForm}
       handleDeleteYear={handleDeleteYearForm}
+      handleResetForm={handleResetFormFidyahIllness}
       headerElement={
         <FidyahFormHeader
           daysCount={false}

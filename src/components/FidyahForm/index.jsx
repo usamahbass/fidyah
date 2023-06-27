@@ -17,6 +17,7 @@ import { useFidyahFormStyles } from "./_styles";
 import { generateYears } from "@fidyah/utils/helpers";
 import CounterForm from "../CounterForm/CounterForm";
 import { Controller } from "react-hook-form";
+import ResetIcon from "@mui/icons-material/Refresh";
 
 const FidyahForm = ({
   fields,
@@ -25,6 +26,7 @@ const FidyahForm = ({
   handleDeleteYear,
   headerElement,
   watch,
+  handleResetForm,
 }) => {
   const { t } = useTranslation();
   const classes = useFidyahFormStyles();
@@ -196,14 +198,28 @@ const FidyahForm = ({
           })}
         </Stack>
 
-        <Button
-          color="warning"
-          variant="outlined"
-          onClick={handleAddYear}
-          startIcon={<AddIcon />}
-          sx={{ marginTop: "1rem", fontWeight: 800 }}>
-          {t("general.addyear")}
-        </Button>
+        <Stack
+          direction="row"
+          alignItems="center"
+          justifyContent="space-between">
+          <Button
+            color="warning"
+            variant="text"
+            onClick={handleAddYear}
+            startIcon={<AddIcon />}
+            sx={{ marginTop: "1rem", fontWeight: 800 }}>
+            {t("general.addyear")}
+          </Button>
+
+          <Button
+            color="error"
+            variant="text"
+            onClick={handleResetForm}
+            startIcon={<ResetIcon />}
+            sx={{ marginTop: "1rem", fontWeight: 800 }}>
+            {t("general.reset")}
+          </Button>
+        </Stack>
       </Box>
     </Box>
   );
@@ -216,6 +232,7 @@ FidyahForm.propTypes = {
   handleDeleteYear: PropTypes.func.isRequired,
   headerElement: PropTypes.node,
   watch: PropTypes.func,
+  handleResetForm: PropTypes.func,
 };
 
 export default FidyahForm;

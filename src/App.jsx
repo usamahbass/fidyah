@@ -1,5 +1,5 @@
 import { lazy, Suspense, useEffect } from "react";
-import { setPayableHaid } from "./context/actions";
+import { setPayableHaid, setPayableIllness } from "./context/actions";
 import { useStore } from "./hooks/useStore";
 
 const FidyahLayout = lazy(() => import("./layouts"));
@@ -18,9 +18,11 @@ const App = () => {
 
   useEffect(() => {
     /**
-     * clearable
+     * clearable state
+     * @returns { 0, 0 }
      */
     dispatch(setPayableHaid(0));
+    dispatch(setPayableIllness(0));
   }, []);
 
   return (

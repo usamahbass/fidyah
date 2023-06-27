@@ -29,5 +29,6 @@
   "general.info": "Info",
   "general.about": "Tentang",
   "general.developer": "Pengembang",
-  "general.repositories": "Repositori"
+  "general.repositories": "Repositori",
+  "general.reset": "Atur Ulang"
 }

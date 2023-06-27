@@ -29,5 +29,6 @@
   "general.info": "Info",
   "general.about": "About",
   "general.developer": "Developer",
-  "general.repositories": "Repositories"
+  "general.repositories": "Repositories",
+  "general.reset": "Reset"
 }
