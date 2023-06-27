@@ -1,14 +1,18 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
 import { useStore } from "@fidyah/hooks/useStore";
 import FidyahForm from "@fidyah/components/FidyahForm";
 import { useTranslation } from "react-i18next";
 import HeartBrokenIcon from "@mui/icons-material/HeartBroken";
 import FidyahFormHeader from "@fidyah/components/FidyahForm/FidyahFormHeader";
+import get from "lodash/get";
+import isEmpty from "lodash/isEmpty";
+import { requests } from "@fidyah/utils/requests";
+import { setPayableIllness } from "@fidyah/context/actions";
 
 const FidyahFormIllnesContainer = () => {
-  const { state } = useStore();
-  const { control, watch } = useForm();
+  const { state, dispatch } = useStore();
+  const { control, watch, getValues } = useForm();
   const { fields, append, remove } = useFieldArray({
     control,
     name: "data",
@@ -16,8 +20,38 @@ const FidyahFormIllnesContainer = () => {
 
   const { t } = useTranslation();
 
+  const [loadingCalculateFidyah, setLoadingCalculateFidyah] = useState(false);
+
+  const renderWatchData = fields.map((_, fieldIdx) =>
+    watch(`data[${fieldIdx}].days`)
+  );
+
   const handleAddYearForm = () => append({ year: "", days: 0 });
   const handleDeleteYearForm = (fieldIdx) => remove(fieldIdx);
+
+  const handleCalculateFidyahFormIllness = async (values) => {
+    setLoadingCalculateFidyah(true);
+
+    try {
+      const response = await requests.post(
+        "/api/palugada/hitung-fidyah?oldill=1",
+        values
+      );
+
+      const totalPayable = get(response.data, "totalBayar", 0);
+      dispatch(setPayableIllness(totalPayable));
+    } finally {
+      setLoadingCalculateFidyah(false);
+    }
+  };
+
+  useEffect(() => {
+    if (!isEmpty(renderWatchData)) {
+      const getValuesFormData = get(getValues(), "data", []);
+
+      handleCalculateFidyahFormIllness(getValuesFormData);
+    }
+  }, renderWatchData);
 
   useEffect(() => {
     let mounted = true;
@@ -45,6 +79,7 @@ const FidyahFormIllnesContainer = () => {
         <FidyahFormHeader
           daysCount={false}
           totalPayable={illnessTotal}
+          loadingPayable={loadingCalculateFidyah}
           title={t("form.headerleft.illness.title")}
           description={t("form.headerleft.illness.description")}
           icon={<HeartBrokenIcon fontSize="large" color="primary" />}

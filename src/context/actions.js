@@ -1,4 +1,9 @@
-import { SET_APP_CURRENCY, SET_APP_THEME, SET_PAYABLE_HAID } from "./types";
+import {
+  SET_APP_CURRENCY,
+  SET_APP_THEME,
+  SET_PAYABLE_HAID,
+  SET_PAYABLE_ILLNESS,
+} from "./types";
 
 export const setAppTheme = (appTheme) => ({
   type: SET_APP_THEME,
@@ -13,4 +18,9 @@ export const setAppCurrency = (appCurrency) => ({
 export const setPayableHaid = (payableHaid) => ({
   type: SET_PAYABLE_HAID,
   payload: payableHaid,
+});
+
+export const setPayableIllness = (payableIllness) => ({
+  type: SET_PAYABLE_ILLNESS,
+  payload: payableIllness,
 });

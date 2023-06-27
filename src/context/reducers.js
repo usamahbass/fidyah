@@ -1,4 +1,9 @@
-import { SET_APP_CURRENCY, SET_APP_THEME, SET_PAYABLE_HAID } from "./types";
+import {
+  SET_APP_CURRENCY,
+  SET_APP_THEME,
+  SET_PAYABLE_HAID,
+  SET_PAYABLE_ILLNESS,
+} from "./types";
 
 export const initialState = {
   theme: "light",
@@ -17,6 +22,11 @@ export const reducer = (state = initialState, action) => {
       return { ...state, currency: action.payload };
     case SET_PAYABLE_HAID:
       return { ...state, payable: { ...state.payable, haid: action.payload } };
+    case SET_PAYABLE_ILLNESS:
+      return {
+        ...state,
+        payable: { ...state.payable, illness: action.payload },
+      };
     default:
       return state;
   }
