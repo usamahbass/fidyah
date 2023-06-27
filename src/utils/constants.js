@@ -22,6 +22,8 @@ export const THEMES = {
       value: "dark",
     },
   ],
+  DARK: "dark",
+  LIGHT: "light",
 };
 
 export const CURRENCY = {

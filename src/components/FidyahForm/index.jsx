@@ -74,9 +74,9 @@ const FidyahForm = ({
                         component={Stack}
                         spacing={1}>
                         <FormLabel
+                          className={classes.formLabel}
                           sx={{
                             fontSize: ".75rem",
-                            color: "#333",
                             fontWeight: 600,
                           }}>
                           {t("form.yearnotfasting")}
@@ -118,9 +118,9 @@ const FidyahForm = ({
                         component={Stack}
                         spacing={1}>
                         <FormLabel
+                          className={classes.formLabel}
                           sx={{
                             fontSize: ".75rem",
-                            color: "#333",
                             fontWeight: 600,
                           }}>
                           {t("form.noofdays")}
@@ -147,9 +147,9 @@ const FidyahForm = ({
                         component={Stack}
                         spacing={1}>
                         <FormLabel
+                          className={classes.formLabel}
                           sx={{
                             fontSize: ".75rem",
-                            color: "#333",
                             fontWeight: 600,
                           }}>
                           {t("form.quantity")}
@@ -173,9 +173,9 @@ const FidyahForm = ({
                           alignItems: "center",
                         }}>
                         <FormLabel
+                          className={classes.formLabel}
                           sx={{
                             fontSize: ".75rem",
-                            color: "#333",
                             fontWeight: 600,
                           }}>
                           {t("form.amount")}

@@ -10,10 +10,7 @@ export const FidyahTheme = ({ children }) => {
   } = useStore();
 
   const theme = createTheme({
-    palette: {
-      ...pallete,
-      mode: appTheme,
-    },
+    palette: pallete(appTheme),
     components: overrides,
     typography: typography,
   });

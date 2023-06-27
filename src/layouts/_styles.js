@@ -1,13 +1,13 @@
 import { makeStyles } from "@mui/styles";
 
-export const useLayoutStyles = makeStyles(() => ({
+export const useLayoutStyles = makeStyles((theme) => ({
   header: {
     display: "flex",
     alignItems: "center",
     justifyContent: "space-between",
   },
   headerSettingIcon: {
-    color: "#333",
+    color: theme.palette.secondary[theme.palette.mode],
   },
   container: {
     maxWidth: "480px",
