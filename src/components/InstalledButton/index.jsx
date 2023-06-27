@@ -6,10 +6,13 @@ import { isAndroid } from "mobile-device-detect";
 import { useReactPWAInstall } from "@fidyah/lib/pwa";
 import InstallMobileIcon from "@mui/icons-material/InstallMobile";
 import InstallDesktopIcon from "@mui/icons-material/InstallDesktop";
+import { useInstalledButtonStyles } from "./_styles";
 
 const InstallButton = () => {
   const { t } = useTranslation();
   const { isInstalled, pwaInstall, supported } = useReactPWAInstall();
+
+  const classes = useInstalledButtonStyles();
 
   const handleInstallApp = () => {
     pwaInstall({
@@ -25,7 +28,8 @@ const InstallButton = () => {
         <IconButton
           aria-label="install-app"
           onClick={handleInstallApp}
-          disabled={isInstalled()}>
+          disabled={isInstalled()}
+          className={classes.headerSettingIcon}>
           {isAndroid ? <InstallMobileIcon /> : <InstallDesktopIcon />}
         </IconButton>
       </Tooltip>
