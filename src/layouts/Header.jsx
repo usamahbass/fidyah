@@ -9,6 +9,7 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import DrawerSettings from "@fidyah/components/DrawerSettings";
 import { useLayoutStyles } from "./_styles";
 import DevDialog from "@fidyah/components/DevDialog";
+import InstallButton from "@fidyah/components/InstalledButton";
 
 const Header = () => {
   const { t } = useTranslation();
@@ -22,6 +23,8 @@ const Header = () => {
       <img src="/vite.svg" alt="logo" />
 
       <Stack direction="row" spacing={1}>
+        <InstallButton />
+
         <Tooltip title={t("general.info")}>
           <IconButton onClick={() => setIsOpenDialogInfo(true)}>
             <InfoIcon className={classes.headerSettingIcon} />

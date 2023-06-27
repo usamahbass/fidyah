@@ -1,9 +1,12 @@
 import { REPOSITORIES } from "@fidyah/utils/constants";
 import { Link, Stack, Typography } from "@mui/material";
+import { useDevDialogStyles } from "./_styles";
 
 const Repositories = () => {
+  const classes = useDevDialogStyles();
+
   return (
-    <Stack component="ul" spacing={1} mt="1rem">
+    <Stack className={classes.ulLists} component="ul" spacing={1} mt="1rem">
       {REPOSITORIES.map((repo, i) => (
         <Typography
           color="secondary"

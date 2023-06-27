@@ -30,5 +30,6 @@
   "general.about": "Tentang",
   "general.developer": "Pengembang",
   "general.repositories": "Repositori",
-  "general.reset": "Atur Ulang"
+  "general.reset": "Atur Ulang",
+  "general.install": "Install"
 }

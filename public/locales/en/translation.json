@@ -30,5 +30,6 @@
   "general.about": "About",
   "general.developer": "Developer",
   "general.repositories": "Repositories",
-  "general.reset": "Reset"
+  "general.reset": "Reset",
+  "general.install": "Install"
 }
