@@ -28,9 +28,12 @@ const InstallButton = () => {
         <IconButton
           aria-label="install-app"
           onClick={handleInstallApp}
-          disabled={isInstalled()}
-          className={classes.headerSettingIcon}>
-          {isAndroid ? <InstallMobileIcon /> : <InstallDesktopIcon />}
+          disabled={isInstalled()}>
+          {isAndroid ? (
+            <InstallMobileIcon className={classes.headerSettingIcon} />
+          ) : (
+            <InstallDesktopIcon className={classes.headerSettingIcon} />
+          )}
         </IconButton>
       </Tooltip>
     </Fade>
