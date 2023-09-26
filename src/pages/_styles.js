@@ -1,9 +1,8 @@
 import { makeStyles } from "@mui/styles";
 
-export const useHeroSectionStyles = makeStyles(() => ({
-  content: {
+export const usePaymentPageStyles = makeStyles(() => ({
+  hero: {
     display: "flex",
-    width: "80%",
     margin: "0 auto",
     marginBottom: "2rem",
     flexDirection: "column",

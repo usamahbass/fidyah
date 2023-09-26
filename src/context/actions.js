@@ -3,6 +3,7 @@ import {
   SET_APP_THEME,
   SET_PAYABLE_HAID,
   SET_PAYABLE_ILLNESS,
+  SET_PAYABLE_PREGNANCY,
 } from "./types";
 
 export const setAppTheme = (appTheme) => ({
@@ -23,4 +24,9 @@ export const setPayableHaid = (payableHaid) => ({
 export const setPayableIllness = (payableIllness) => ({
   type: SET_PAYABLE_ILLNESS,
   payload: payableIllness,
+});
+
+export const setPayablePregNancy = (payablePregNancy) => ({
+  type: SET_PAYABLE_PREGNANCY,
+  payload: payablePregNancy,
 });

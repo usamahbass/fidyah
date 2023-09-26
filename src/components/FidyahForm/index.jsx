@@ -30,6 +30,9 @@ const FidyahForm = ({
 }) => {
   const { t } = useTranslation();
   const classes = useFidyahFormStyles();
+  const watchFormData = watch("data", []);
+
+  const watchFormDataYear = watchFormData?.map((data) => data.year);
 
   return (
     <Box className={classes.container}>
@@ -104,7 +107,12 @@ const FidyahForm = ({
                                 {t("general.select")}
                               </option>
                               {generateYears().map((year, yearIdx) => (
-                                <option value={year} key={`${year}-${yearIdx}`}>
+                                <option
+                                  value={year}
+                                  key={`${year}-${yearIdx}`}
+                                  disabled={watchFormDataYear.includes(
+                                    String(year)
+                                  )}>
                                   {year}
                                 </option>
                               ))}
@@ -226,7 +234,7 @@ const FidyahForm = ({
 };
 
 FidyahForm.propTypes = {
-  control: PropTypes.func.isRequired,
+  control: PropTypes.object.isRequired,
   fields: PropTypes.array.isRequired,
   handleAddYear: PropTypes.func.isRequired,
   handleDeleteYear: PropTypes.func.isRequired,

@@ -14,6 +14,8 @@
   "form.headerleft.haid.description": "Hari menuju Qadha'",
   "form.headerleft.illness.title": "Penyakit atau Usia Tua",
   "form.headerleft.illness.description": "Perhitungan bagi yang sakit",
+  "form.headerleft.pregnancy.title": "Ibu Hamil / Menyusui",
+  "form.headerleft.pregnancy.description": "Perhitungan bagi ibu hamil / menyusui",
   "form.headerright.title": "Total Hutang",
   "general.year": "Tahun",
   "form.yearnotfasting": "Tahun tidak puasa",
@@ -31,5 +33,10 @@
   "general.developer": "Pengembang",
   "general.repositories": "Repositori",
   "general.reset": "Atur Ulang",
-  "general.install": "Install"
+  "general.install": "Install",
+  "general.totalpayablefidyah": "Jumlah fidyah yang harus dibayar",
+  "general.makepayment": "Buat Pembayaran",
+  "general.or": "atau",
+
+  "payment.title": "Silakan mendaftar dengan detail Anda untuk melanjutkan pembayaran."
 }

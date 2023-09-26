@@ -11,7 +11,8 @@
       "@fidyah/context/*": ["./context/*"],
       "@fidyah/hooks/*": ["./hooks/*"],
       "@fidyah/containers/*": ["./containers/*"],
-      "@fidyah/icons/*": ["./icons/*"]
+      "@fidyah/icons/*": ["./icons/*"],
+      "@fidyah/pages/*": ["./pages/*"]
     }
   },
   "include": ["src"]

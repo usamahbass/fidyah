@@ -3,15 +3,19 @@ import { makeStyles } from "@mui/styles";
 export const useFidyahFormStyles = makeStyles((theme) => {
   return {
     container: {
-      paddingTop: "2rem",
+      paddingTop: "1rem",
+      borderRadius: ".5rem",
+      border: `2px solid #FF7A00`,
+      [theme.breakpoints.down("sm")]: {
+        border: "0",
+      },
     },
     header: {
       display: "flex",
       alignItems: "center",
       position: "sticky",
       top: 0,
-      paddingTop: "1rem",
-      paddingBottom: "1rem",
+      padding: "1.5rem",
       backgroundColor: theme.palette.background.default,
       transition: "all .3s",
       zIndex: 99,
@@ -20,6 +24,7 @@ export const useFidyahFormStyles = makeStyles((theme) => {
         flexDirection: "column",
         alignItems: "start",
         gap: "1rem",
+        padding: "0.25rem",
       },
     },
     headerLeft: {
@@ -39,10 +44,10 @@ export const useFidyahFormStyles = makeStyles((theme) => {
       },
     },
     formContent: {
-      marginTop: "2rem",
       padding: "2rem",
-      borderRadius: ".5rem",
-      border: `2px solid #FF7A00`,
+      [theme.breakpoints.down("sm")]: {
+        padding: '2rem 0.5rem 2rem 0.5rem',
+      },
     },
     formLabel: {
       color: theme.palette.secondary[theme.palette.mode],

@@ -52,7 +52,7 @@ const CounterForm = ({ onChange, value, disabled }) => {
         value={value}
       />
       <Button
-        disabled={disabled}
+        disabled={disabled || value === 31}
         size="small"
         onClick={() => onChange(value + 1)}
         sx={{

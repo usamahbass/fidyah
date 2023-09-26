@@ -3,6 +3,7 @@ import {
   SET_APP_THEME,
   SET_PAYABLE_HAID,
   SET_PAYABLE_ILLNESS,
+  SET_PAYABLE_PREGNANCY,
 } from "./types";
 
 export const initialState = {
@@ -11,6 +12,7 @@ export const initialState = {
   payable: {
     haid: 0,
     illness: 0,
+    pregnancy: 0,
   },
 };
 
@@ -26,6 +28,11 @@ export const reducer = (state = initialState, action) => {
       return {
         ...state,
         payable: { ...state.payable, illness: action.payload },
+      };
+    case SET_PAYABLE_PREGNANCY:
+      return {
+        ...state,
+        payable: { ...state.payable, pregnancy: action.payload },
       };
     default:
       return state;

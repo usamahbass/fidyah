@@ -28,15 +28,6 @@ const FidyahFormHaidContainer = () => {
 
   const [loadingCalculateFidyah, setLoadingCalculateFidyah] = useState(false);
 
-  const handleDeleteYearForm = (fieldIdx) => remove(fieldIdx);
-  const handleAddYearForm = () => append({ year: "", days: 0 });
-
-  const handleResetFormFidyahHaid = () => {
-    resetForm();
-    prepend({ year: "", days: 0 });
-    dispatch(setPayableHaid(0));
-  };
-
   const handleCalculateFidyahFormHaid = async (values) => {
     setLoadingCalculateFidyah(true);
 
@@ -51,6 +42,22 @@ const FidyahFormHaidContainer = () => {
     } finally {
       setLoadingCalculateFidyah(false);
     }
+  };
+
+  const handleDeleteYearForm = (fieldIdx) => {
+    remove(fieldIdx);
+
+    const getValuesFormData = get(getValues(), "data", []);
+
+    // callback calculate function
+    handleCalculateFidyahFormHaid(getValuesFormData);
+  };
+  const handleAddYearForm = () => append({ year: "", days: 0 });
+
+  const handleResetFormFidyahHaid = () => {
+    resetForm();
+    prepend({ year: "", days: 0 });
+    dispatch(setPayableHaid(0));
   };
 
   useEffect(() => {

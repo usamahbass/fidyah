@@ -5,24 +5,22 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import PaymentsOutlinedIcon from "@mui/icons-material/PaymentsOutlined";
 import Skeleton from "@mui/material/Skeleton";
+import get from "lodash/get";
 import { useFidyahFormStyles } from "./_styles";
-import { useStore } from "@fidyah/hooks/useStore";
-import replace from "lodash/replace";
-import toInteger from "lodash/toInteger";
-import { CURRENCY } from "@fidyah/utils/constants";
-import { toRupiah } from "@fidyah/utils/helpers";
 
-const handleFormattingTotalPayable = (totalPayable, currency) => {
-  const isRupiah = currency === CURRENCY.RUPIAH;
+// TODO: comment ...
 
-  if (isRupiah) {
-    const replaceFromRP = replace(totalPayable, "Rp", "");
-    const toIntegerFromRP = toInteger(replaceFromRP);
-    return toRupiah(toIntegerFromRP);
-  }
+// const handleFormattingTotalPayable = (totalPayable, currency) => {
+//   const isRupiah = currency === CURRENCY.RUPIAH;
 
-  return replace(totalPayable, "Rp", CURRENCY.DOLLAR);
-};
+//   if (isRupiah) {
+//     const replaceFromRP = replace(totalPayable, "Rp", "");
+//     const toIntegerFromRP = toInteger(replaceFromRP);
+//     return toRupiah(toIntegerFromRP);
+//   }
+
+//   return replace(totalPayable, "Rp", CURRENCY.DOLLAR);
+// };
 
 const FidyahFormHeader = ({
   icon,
@@ -33,17 +31,11 @@ const FidyahFormHeader = ({
   loadingPayable,
 }) => {
   const { t } = useTranslation();
-  const {
-    state: { currency },
-  } = useStore();
   const classes = useFidyahFormStyles();
 
-  const checkDaysCount = daysCount === 0 || daysCount || description;
+  const totalFidyah = get(totalPayable, "bayarFidyah", 0);
 
-  const formattingTotalPayable = handleFormattingTotalPayable(
-    totalPayable,
-    currency
-  );
+  const checkDaysCount = daysCount === 0 || daysCount || description;
 
   return (
     <Box className={classes.header}>
@@ -79,7 +71,7 @@ const FidyahFormHeader = ({
             <Skeleton />
           ) : (
             <Typography fontWeight={700} color="primary" variant="caption">
-              {formattingTotalPayable}
+              {totalFidyah}
             </Typography>
           )}
         </Stack>
@@ -96,7 +88,7 @@ FidyahFormHeader.propTypes = {
   icon: PropTypes.node,
   title: PropTypes.string,
   description: PropTypes.string,
-  daysCount: PropTypes.number,
+  daysCount: PropTypes.number | PropTypes.bool,
   totalPayable: PropTypes.number,
   loadingPayable: PropTypes.bool,
 };
