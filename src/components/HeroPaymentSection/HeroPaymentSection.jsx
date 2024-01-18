@@ -23,9 +23,9 @@ const HeroPaymentSection = ({ totalPayable }) => {
           top="100px"
           spacing={1}
           className={classes.contentText}>
-          <Typography width="14rem">{t("payment.title")}</Typography>
+          <Typography width="15rem">{t("payment.title")}</Typography>
 
-          <Typography variant="body2" width="14rem">
+          <Typography variant="body2" width="15rem">
             {t("general.totalpayablefidyah")} <b>{totalPayable}</b>
           </Typography>
         </Stack>
@@ -40,7 +40,7 @@ const HeroPaymentSection = ({ totalPayable }) => {
           <Typography>{t("hero.sectionBoxTitle")}</Typography>
           <Button
             variant="contained"
-            style={{ color: "white", width: "30%", borderRadius: "1rem" }}
+            style={{ color: "white", width: "45%", borderRadius: "1rem" }}
             onClick={() => setIsOpenDrawerSetting(true)}>
             {t("button.changeHere")}
           </Button>

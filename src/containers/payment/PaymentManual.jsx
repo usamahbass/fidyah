@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { Stack, TextField } from "@mui/material";
+import { Stack, TextField, Typography } from "@mui/material";
 import { MuiTelInput } from "mui-tel-input";
 import FidyahLayout from "@fidyah/layouts";
 import { toRupiah } from "@fidyah/utils/helpers";
@@ -108,6 +108,7 @@ const PaymentManual = () => {
         />
       }>
       <HeroPaymentSection totalPayable={toRupiah(totalPayable)} />
+      <Typography px="1rem" mb="1rem" mt="1rem">{t("general.fillPersonalData")}</Typography>
       <Stack px="1rem" mb="2rem" alignItems="center">
         <Stack spacing={3} width="100%">
           <Controller

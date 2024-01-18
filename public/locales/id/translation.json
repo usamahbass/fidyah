@@ -62,5 +62,7 @@
   "featureSection.title": "Mau bayar fidyah apa hari ini?",
   "featureSection.haid": "Haid",
   "featureSection.illness": "Penyakit / Usia Tua",
-  "featureSection.pregnancy": "Ibu Hamil"
+  "featureSection.pregnancy": "Ibu Hamil",
+
+  "general.fillPersonalData": "Isi Data Diri"
 }

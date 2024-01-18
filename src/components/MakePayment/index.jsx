@@ -29,7 +29,8 @@ const MakePayment = ({ onMakePayment, title, isLoadingButton }) => {
       sx={{
         bottom: 0,
         zIndex: 99,
-        width: "481px",
+        width: "100%",
+        maxWidth: "481px",
         position: "fixed",
         backgroundColor: "white",
       }}>

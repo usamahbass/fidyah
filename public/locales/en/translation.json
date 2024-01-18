@@ -62,5 +62,7 @@
   "featureSection.title": "What fidyah do you want to pay today?",
   "featureSection.haid": "Haid",
   "featureSection.illness": "Disease / Old Age",
-  "featureSection.pregnancy": "Pregnant Mom"
+  "featureSection.pregnancy": "Pregnant Mom",
+
+  "general.fillPersonalData": "Fill Personal Data"
 }
