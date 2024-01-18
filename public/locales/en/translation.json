@@ -1,5 +1,5 @@
 {
-  "header.title": "Fidyah Calculator",
+  "header.title": "Fidyahku",
   "header.description": "Make fidyah payment for your missed fasts during past ramadhan",
   "settings.title": "Settings",
   "settings.language.title": "Language",
@@ -14,6 +14,8 @@
   "form.headerleft.haid.description": "Days to Qadha'",
   "form.headerleft.illness.title": "Illness or Old-age",
   "form.headerleft.illness.description": "Calculation for the sick",
+  "form.headerleft.pregnancy.title": "Pregnancy or Feeding",
+  "form.headerleft.pregnancy.description": "Calculations for pregnant and lactating women",
   "form.headerright.title": "Total Payable",
   "general.year": "Year",
   "form.yearnotfasting": "Year not fasting",
@@ -31,5 +33,34 @@
   "general.developer": "Developer",
   "general.repositories": "Repositories",
   "general.reset": "Reset",
-  "general.install": "Install"
+  "general.install": "Install",
+  "general.totalpayablefidyah": "Total payable fidyah",
+  "general.makepayment": "Make Payment",
+  "general.or": "or",
+  "general.assets": "Assets",
+
+  "button.enrollManual": "Manual Payment",
+  "button.buy": "Buy",
+
+  "label.name": "Name",
+  "label.email": "Email",
+  "label.noTelp": "Telephone Number",
+
+  "payment.title": "Please enrol with your details to continue with payment.",
+
+  "inputError.nameRequired": "Name required !",
+  "inputError.emailRequired": "Email required !",
+  "inputError.noTelpRequired": "Telephone number required !",
+  "inputError.emailNotValid": "Email not valid !",
+  "inputError.noTelpMin": "Phone number must be at least 9 digits !",
+  "inputError.noTelpMax": "Phone number up to 13 digits !",
+
+  "hero.title": "Enjoy various ways to calculate fidyah in the app Fidyahku",
+  "button.getStarted": "Get started",
+  "hero.sectionBoxTitle": "Want to change the language in fidyahku, or change the theme?",
+  "button.changeHere": "Change here",
+  "featureSection.title": "What fidyah do you want to pay today?",
+  "featureSection.haid": "Haid",
+  "featureSection.illness": "Disease / Old Age",
+  "featureSection.pregnancy": "Pregnant Mom"
 }

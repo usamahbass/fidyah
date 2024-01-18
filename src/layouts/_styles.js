@@ -16,5 +16,7 @@ export const useLayoutStyles = makeStyles((theme) => ({
     margin: "0 auto",
     // padding: "0px 16px 80px",
     height: "100%",
+    paddingBottom: "5rem",
+    backgroundColor: "rgb(255 255 255/1)",
   },
 }));

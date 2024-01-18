@@ -9,7 +9,7 @@ export const FidyahContext = createContext({
 
 const checkLocalStorage = () => {
   if (localStorage.getItem("fidyah") !== null) {
-    return JSON.parse(localStorage.getItem("fidyah") || "");
+    return JSON.parse(localStorage.getItem("fidyah") || initialState);
   }
 
   return initialState;

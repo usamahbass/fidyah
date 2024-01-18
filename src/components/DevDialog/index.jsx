@@ -11,6 +11,7 @@ import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import Dev from "./Dev";
 import Repositories from "./Repositories";
+import Assets from "./Assets";
 
 const Transition = forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -54,6 +55,16 @@ const DevDialog = ({ isOpen, handleClose }) => {
             <ListItemText
               primary={t("general.developer")}
               secondary={<Dev />}
+              secondaryTypographyProps={{
+                marginTop: ".5rem",
+              }}
+            />
+          </ListItem>
+
+          <ListItem>
+            <ListItemText
+              primary={t("general.assets")}
+              secondary={<Assets />}
               secondaryTypographyProps={{
                 marginTop: ".5rem",
               }}

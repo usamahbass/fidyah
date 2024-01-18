@@ -14,4 +14,11 @@ export const overrides = {
       },
     },
   },
+  MuiCssBaseline: {
+    styleOverrides: {
+      body: {
+        backgroundColor: "#f7f7f7",
+      },
+    },
+  },
 };

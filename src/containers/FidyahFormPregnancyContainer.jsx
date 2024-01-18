@@ -3,14 +3,18 @@ import { useFieldArray, useForm } from "react-hook-form";
 import { useStore } from "@fidyah/hooks/useStore";
 import FidyahForm from "@fidyah/components/FidyahForm";
 import { useTranslation } from "react-i18next";
-import HeartBrokenIcon from "@mui/icons-material/HeartBroken";
+import PregnantWomanIcon from "@mui/icons-material/PregnantWoman";
 import FidyahFormHeader from "@fidyah/components/FidyahForm/FidyahFormHeader";
 import get from "lodash/get";
 import isEmpty from "lodash/isEmpty";
 import { requests } from "@fidyah/utils/requests";
-import { setLoadingCalculateIllnessFidyah, setPayableIllness } from "@fidyah/context/actions";
+import {
+  setLoadingCalculatePregnancyFidyah,
+  setPayableIllness,
+  setPayablePregNancy,
+} from "@fidyah/context/actions";
 
-const FidyahFormIllnesContainer = () => {
+const FidyahFormPregnancyContainer = () => {
   const { state, dispatch } = useStore();
   const { control, watch, getValues, reset: resetForm } = useForm();
   const { fields, append, remove, prepend } = useFieldArray({
@@ -34,7 +38,7 @@ const FidyahFormIllnesContainer = () => {
   };
 
   const handleCalculateFidyahFormIllness = async (values) => {
-    dispatch(setLoadingCalculateIllnessFidyah(true));
+    dispatch(setLoadingCalculatePregnancyFidyah(true));
 
     try {
       const response = await requests.post(
@@ -43,9 +47,9 @@ const FidyahFormIllnesContainer = () => {
       );
 
       const totalPayable = get(response.data, "totalBayar", 0);
-      dispatch(setPayableIllness(totalPayable));
+      dispatch(setPayablePregNancy(totalPayable));
     } finally {
-      dispatch(setLoadingCalculateIllnessFidyah(false));
+      dispatch(setLoadingCalculatePregnancyFidyah(false));
     }
   };
 
@@ -68,13 +72,11 @@ const FidyahFormIllnesContainer = () => {
     return () => (mounted = false);
   }, []);
 
-  const {
-    payable: { illness: illnessTotal } = {},
-  } = state;
+  const { payable: { pregnancy: pregNancyTotal } = {} } = state;
 
   return (
     <FidyahForm
-      id='illness'
+      id="pregnancy"
       watch={watch}
       fields={fields}
       control={control}
@@ -84,15 +86,15 @@ const FidyahFormIllnesContainer = () => {
       headerElement={
         <FidyahFormHeader
           daysCount={false}
-          totalPayable={illnessTotal}
-          title={t("form.headerleft.illness.title")}
-          loadingPayable={state.loading?.calculateFidyah?.illness}
-          description={t("form.headerleft.illness.description")}
-          icon={<HeartBrokenIcon fontSize="large" color="primary" />}
+          totalPayable={pregNancyTotal}
+          title={t("form.headerleft.pregnancy.title")}
+          loadingPayable={state.loading?.calculateFidyah?.pregnancy}
+          description={t("form.headerleft.pregnancy.description")}
+          icon={<PregnantWomanIcon fontSize="large" color="primary" />}
         />
       }
     />
   );
 };
 
-export default FidyahFormIllnesContainer;
+export default FidyahFormPregnancyContainer;

@@ -1,5 +1,5 @@
 {
-  "header.title": "Kalkulator Fidyah",
+  "header.title": "Fidyahku",
   "header.description": "Lakukan pembayaran fidyah untuk puasa yang terlewat selama ramadhan yang lalu",
   "settings.title": "Pengaturan",
   "settings.language.title": "Bahasa",
@@ -14,6 +14,8 @@
   "form.headerleft.haid.description": "Hari menuju Qadha'",
   "form.headerleft.illness.title": "Penyakit atau Usia Tua",
   "form.headerleft.illness.description": "Perhitungan bagi yang sakit",
+  "form.headerleft.pregnancy.title": "Ibu Hamil",
+  "form.headerleft.pregnancy.description": "Perhitungan bagi ibu hamil",
   "form.headerright.title": "Total Hutang",
   "general.year": "Tahun",
   "form.yearnotfasting": "Tahun tidak puasa",
@@ -31,5 +33,34 @@
   "general.developer": "Pengembang",
   "general.repositories": "Repositori",
   "general.reset": "Atur Ulang",
-  "general.install": "Install"
+  "general.install": "Install",
+  "general.totalpayablefidyah": "Jumlah fidyah yang harus dibayar",
+  "general.makepayment": "Buat Pembayaran",
+  "general.or": "atau",
+  "general.assets": "Aset",
+
+  "button.enrollManual": "Pembayaran Manual",
+  "button.buy": "Bayar",
+
+  "label.name": "Nama",
+  "label.email": "Email",
+  "label.noTelp": "Nomor Telepone",
+
+  "payment.title": "Silakan mendaftar dengan detail Anda untuk melanjutkan pembayaran.",
+
+  "inputError.nameRequired": "Nama diperlukan !",
+  "inputError.emailRequired": "Email diperlukan !",
+  "inputError.noTelpRequired": "Nomor telepone diperlukan !",
+  "inputError.emailNotValid": "Email tidak valid !",
+  "inputError.noTelpMin": "Nomor telepon minimal 9 angka !",
+  "inputError.noTelpMax": "Nomor telepon maksimal 13 angka !",
+
+  "hero.title": "Nikmati beragam cara menghitung fidyah di aplikasi Fidyahku",
+  "button.getStarted": "Mulai sekarang",
+  "hero.sectionBoxTitle": "Ingin mengubah bahasa pada aplikasi fidyahku, atau ubah tema?",
+  "button.changeHere": "Ubah disini",
+  "featureSection.title": "Mau bayar fidyah apa hari ini?",
+  "featureSection.haid": "Haid",
+  "featureSection.illness": "Penyakit / Usia Tua",
+  "featureSection.pregnancy": "Ibu Hamil"
 }

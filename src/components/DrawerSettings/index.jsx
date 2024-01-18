@@ -16,9 +16,9 @@ import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import ListItemSecondaryAction from "@mui/material/ListItemSecondaryAction";
 import NativeSelect from "@mui/material/NativeSelect";
-import { CURRENCY, LANGUAGES, THEMES } from "@fidyah/utils/constants";
+import { LANGUAGES, THEMES } from "@fidyah/utils/constants";
 import { useStore } from "@fidyah/hooks/useStore";
-import { setAppCurrency, setAppTheme } from "@fidyah/context/actions";
+import { setAppTheme } from "@fidyah/context/actions";
 import { Tooltip } from "@mui/material";
 
 const StyledBox = styled(Box)(({ theme }) => ({
@@ -48,7 +48,7 @@ const DrawerSettings = ({
 
   const {
     dispatch,
-    state: { theme, currency },
+    state: { theme },
   } = useStore();
 
   // This is used only for the example
@@ -57,7 +57,6 @@ const DrawerSettings = ({
 
   const handleChangeLanguage = (e) => changeLanguage(e.target.value);
   const handleChangeTheme = (e) => dispatch(setAppTheme(e.target.value));
-  const handleChangeCurrency = (e) => dispatch(setAppCurrency(e.target.value));
 
   const themeDataMapper = THEMES.LISTS.map((themeParam) => ({
     label: t(`settings.theme.${themeParam.value}`),
@@ -138,30 +137,6 @@ const DrawerSettings = ({
                           value={theme.value}
                           key={`${theme.value}-${themeIdx}`}>
                           {theme.label}
-                        </option>
-                      ))}
-                    </NativeSelect>
-                  </ListItemSecondaryAction>
-                </ListItem>
-
-                <ListItem>
-                  <ListItemText
-                    primary={t("settings.currency.title")}
-                    secondary={t("settings.currency.description")}
-                  />
-
-                  <ListItemSecondaryAction>
-                    <NativeSelect
-                      value={currency}
-                      id="select-currency"
-                      onChange={handleChangeCurrency}
-                      labelId="select-currency-label"
-                      label={t("settings.currency.title")}>
-                      {CURRENCY.LISTS.map((curr, currIdx) => (
-                        <option
-                          value={curr.value}
-                          key={`${curr.value}-${currIdx}`}>
-                          {curr.label}
                         </option>
                       ))}
                     </NativeSelect>
