@@ -8,7 +8,9 @@ const Header = ({ title }) => {
   const navigate = useNavigate();
   const classes = useHeaderStyles();
 
-  const handlePrevPage = () => navigate(-1);
+  const handlePrevPage = () => {
+    navigate(-1);
+  };
 
   return (
     <Box component="header" className={classes.header}>

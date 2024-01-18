@@ -76,6 +76,7 @@ const FidyahFormPregnancyContainer = () => {
 
   return (
     <FidyahForm
+      id="pregnancy"
       watch={watch}
       fields={fields}
       control={control}

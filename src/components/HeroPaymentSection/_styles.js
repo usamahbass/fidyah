@@ -1,6 +1,6 @@
 import { makeStyles } from "@mui/styles";
 
-export const useHeroSectionStyles = makeStyles((theme) => ({
+export const useHeroPaymentSectionStyles = makeStyles((theme) => ({
   content: {
     marginBottom: "5rem",
     alignItems: "center",

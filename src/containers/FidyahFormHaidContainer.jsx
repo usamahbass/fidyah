@@ -85,6 +85,7 @@ const FidyahFormHaidContainer = () => {
 
   return (
     <FidyahForm
+      id="haid"
       watch={watch}
       fields={fields}
       control={control}

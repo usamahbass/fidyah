@@ -5,7 +5,7 @@ export const useFidyahFormStyles = makeStyles((theme) => {
     container: {
       paddingTop: "1rem",
       borderRadius: ".5rem",
-      border: `2px dashed`,
+      border: `3px solid ${theme.palette.primary[theme.palette.mode]}`,
       [theme.breakpoints.down("sm")]: {
         border: "0",
       },

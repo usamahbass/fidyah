@@ -27,6 +27,7 @@ const FidyahForm = ({
   headerElement,
   watch,
   handleResetForm,
+  id
 }) => {
   const { t } = useTranslation();
   const classes = useFidyahFormStyles();
@@ -35,199 +36,206 @@ const FidyahForm = ({
   const watchFormDataYear = watchFormData?.map((data) => data.year);
 
   return (
-    <Box className={classes.container}>
-      {headerElement}
-      <Box className={classes.formContent}>
-        <Stack spacing={3}>
-          {fields.map((field, fieldIdx) => {
-            const watchCurrentYearValue = watch(`data.${fieldIdx}.year`);
-            const watchCurrentDayValue = watch(`data.${fieldIdx}.days`);
+    <Box px="1rem" id={id}>
+      <Box className={classes.container}>
+        {headerElement}
+        <Box className={classes.formContent}>
+          <Stack spacing={3}>
+            {fields.map((field, fieldIdx) => {
+              const watchCurrentYearValue = watch(`data.${fieldIdx}.year`);
+              const watchCurrentDayValue = watch(`data.${fieldIdx}.days`);
 
-            const quantityValue =
-              watchCurrentDayValue === 0 ? "-" : watchCurrentDayValue;
+              const quantityValue =
+                watchCurrentDayValue === 0 ? "-" : watchCurrentDayValue;
 
-            return (
-              <Collapse mountOnEnter unmountOnExit key={field.id} in>
-                <Stack spacing={3}>
+              return (
+                <Collapse mountOnEnter unmountOnExit key={field.id} in>
                   <Stack spacing={3}>
-                    {/* HEADER CONTENT */}
+                    <Stack spacing={3}>
+                      {/* HEADER CONTENT */}
 
-                    <Stack alignItems="center" direction="row" spacing={1}>
-                      <Typography variant="body2" fontWeight={800}>
-                        {t("general.year").toUpperCase()} {fieldIdx + 1}
-                      </Typography>
+                      <Stack alignItems="center" direction="row" spacing={1}>
+                        <Typography variant="body2" fontWeight={800}>
+                          {t("general.year").toUpperCase()} {fieldIdx + 1}
+                        </Typography>
 
-                      {fields.length > 1 && (
-                        <Tooltip title={t("general.deleteyear")}>
-                          <IconButton
-                            size="small"
-                            color="error"
-                            onClick={() => handleDeleteYear(fieldIdx)}>
-                            <RemoveCircleIcon />
-                          </IconButton>
-                        </Tooltip>
-                      )}
-                    </Stack>
+                        {fields.length > 1 && (
+                          <Tooltip title={t("general.deleteyear")}>
+                            <IconButton
+                              size="small"
+                              color="error"
+                              onClick={() => handleDeleteYear(fieldIdx)}>
+                              <RemoveCircleIcon />
+                            </IconButton>
+                          </Tooltip>
+                        )}
+                      </Stack>
 
-                    {/* FORM */}
+                      {/* FORM */}
 
-                    <Stack alignItems="center" spacing={3} direction="row">
-                      <FormControl
-                        sx={{ width: "50%" }}
-                        component={Stack}
-                        spacing={1}>
-                        <FormLabel
-                          className={classes.formLabel}
-                          sx={{
-                            fontSize: ".75rem",
-                            fontWeight: 600,
-                          }}>
-                          {t("form.yearnotfasting")}
-                        </FormLabel>
-                        <Controller
-                          control={control}
-                          rules={{ required: true }}
-                          name={`data.${fieldIdx}.year`}
-                          render={({ field: { onChange, value } }) => (
-                            <NativeSelect
-                              value={value}
-                              displayEmpty
-                              id="select-year"
-                              sx={{ fontSize: ".90rem" }}
-                              placeholder={t("general.select")}
-                              onChange={(e) => onChange(e.target.value)}
-                              renderValue={(selected) => {
-                                if (selected.length === 0) {
-                                  return t("general.select");
-                                }
+                      <Stack alignItems="center" spacing={3} direction="row">
+                        <FormControl
+                          sx={{ width: "50%" }}
+                          component={Stack}
+                          spacing={1}>
+                          <FormLabel
+                            className={classes.formLabel}
+                            sx={{
+                              fontSize: ".75rem",
+                              fontWeight: 600,
+                            }}>
+                            {t("form.yearnotfasting")}
+                          </FormLabel>
+                          <Controller
+                            control={control}
+                            rules={{ required: true }}
+                            name={`data.${fieldIdx}.year`}
+                            render={({ field: { onChange, value } }) => (
+                              <NativeSelect
+                                value={value}
+                                displayEmpty
+                                id="select-year"
+                                sx={{ fontSize: ".90rem" }}
+                                placeholder={t("general.select")}
+                                onChange={(e) => onChange(e.target.value)}
+                                renderValue={(selected) => {
+                                  if (selected.length === 0) {
+                                    return t("general.select");
+                                  }
 
-                                return selected;
-                              }}>
-                              <option disabled value="">
-                                {t("general.select")}
-                              </option>
-                              {generateYears().map((year, yearIdx) => (
-                                <option
-                                  value={year}
-                                  key={`${year}-${yearIdx}`}
-                                  disabled={watchFormDataYear.includes(
-                                    String(year)
-                                  )}>
-                                  {year}
+                                  return selected;
+                                }}>
+                                <option disabled value="">
+                                  {t("general.select")}
                                 </option>
-                              ))}
-                            </NativeSelect>
-                          )}
-                        />
-                      </FormControl>
+                                {generateYears().map((year, yearIdx) => (
+                                  <option
+                                    value={year}
+                                    key={`${year}-${yearIdx}`}
+                                    disabled={watchFormDataYear.includes(
+                                      String(year)
+                                    )}>
+                                    {year}
+                                  </option>
+                                ))}
+                              </NativeSelect>
+                            )}
+                          />
+                        </FormControl>
 
-                      <FormControl
-                        sx={{ width: "50%" }}
-                        component={Stack}
-                        spacing={1}>
-                        <FormLabel
-                          className={classes.formLabel}
+                        <FormControl
+                          sx={{ width: "50%" }}
+                          component={Stack}
+                          spacing={1}>
+                          <FormLabel
+                            className={classes.formLabel}
+                            sx={{
+                              fontSize: ".75rem",
+                              fontWeight: 600,
+                            }}>
+                            {t("form.noofdays")}
+                          </FormLabel>
+
+                          <Controller
+                            control={control}
+                            rules={{ required: true }}
+                            name={`data.${fieldIdx}.days`}
+                            render={({ field: { onChange, value } }) => (
+                              <CounterForm
+                                value={value}
+                                onChange={onChange}
+                                disabled={!watchCurrentYearValue}
+                              />
+                            )}
+                          />
+                        </FormControl>
+                      </Stack>
+
+                      <Stack alignItems="center" spacing={3} direction="row">
+                        <FormControl
+                          sx={{ width: "50%" }}
+                          component={Stack}
+                          spacing={1}>
+                          <FormLabel
+                            className={classes.formLabel}
+                            sx={{
+                              fontSize: ".75rem",
+                              fontWeight: 600,
+                            }}>
+                            {t("form.quantity")}
+                          </FormLabel>
+
+                          <Typography
+                            color="primary"
+                            variant="h6"
+                            fontWeight={800}>
+                            {quantityValue}
+                          </Typography>
+                        </FormControl>
+
+                        <FormControl
+                          component={Stack}
+                          spacing={1}
                           sx={{
-                            fontSize: ".75rem",
-                            fontWeight: 600,
+                            width: "50%",
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
                           }}>
-                          {t("form.noofdays")}
-                        </FormLabel>
+                          <FormLabel
+                            className={classes.formLabel}
+                            sx={{
+                              fontSize: ".75rem",
+                              fontWeight: 600,
+                            }}>
+                            {t("form.amount")}
+                          </FormLabel>
 
-                        <Controller
-                          control={control}
-                          rules={{ required: true }}
-                          name={`data.${fieldIdx}.days`}
-                          render={({ field: { onChange, value } }) => (
-                            <CounterForm
-                              value={value}
-                              onChange={onChange}
-                              disabled={!watchCurrentYearValue}
-                            />
-                          )}
-                        />
-                      </FormControl>
+                          <Typography
+                            color="primary"
+                            variant="h6"
+                            fontWeight={800}>
+                            -
+                          </Typography>
+                        </FormControl>
+                      </Stack>
                     </Stack>
 
-                    <Stack alignItems="center" spacing={3} direction="row">
-                      <FormControl
-                        sx={{ width: "50%" }}
-                        component={Stack}
-                        spacing={1}>
-                        <FormLabel
-                          className={classes.formLabel}
-                          sx={{
-                            fontSize: ".75rem",
-                            fontWeight: 600,
-                          }}>
-                          {t("form.quantity")}
-                        </FormLabel>
-
-                        <Typography
-                          color="primary"
-                          variant="h6"
-                          fontWeight={800}>
-                          {quantityValue}
-                        </Typography>
-                      </FormControl>
-
-                      <FormControl
-                        component={Stack}
-                        spacing={1}
-                        sx={{
-                          width: "50%",
-                          display: "flex",
-                          justifyContent: "center",
-                          alignItems: "center",
-                        }}>
-                        <FormLabel
-                          className={classes.formLabel}
-                          sx={{
-                            fontSize: ".75rem",
-                            fontWeight: 600,
-                          }}>
-                          {t("form.amount")}
-                        </FormLabel>
-
-                        <Typography
-                          color="primary"
-                          variant="h6"
-                          fontWeight={800}>
-                          -
-                        </Typography>
-                      </FormControl>
-                    </Stack>
+                    <Divider />
                   </Stack>
+                </Collapse>
+              );
+            })}
+          </Stack>
 
-                  <Divider />
-                </Stack>
-              </Collapse>
-            );
-          })}
-        </Stack>
+          <Stack
+            direction="row"
+            alignItems="center"
+            justifyContent="space-between">
+            <Button
+              color="warning"
+              variant="contained"
+              onClick={handleAddYear}
+              startIcon={<AddIcon />}
+              sx={{
+                marginTop: "1rem",
+                fontWeight: 500,
+                borderRadius: "1rem",
+                color: "white",
+              }}>
+              {t("general.addyear")}
+            </Button>
 
-        <Stack
-          direction="row"
-          alignItems="center"
-          justifyContent="space-between">
-          <Button
-            color="warning"
-            variant="text"
-            onClick={handleAddYear}
-            startIcon={<AddIcon />}
-            sx={{ marginTop: "1rem", fontWeight: 800 }}>
-            {t("general.addyear")}
-          </Button>
-
-          <Button
-            color="error"
-            variant="text"
-            onClick={handleResetForm}
-            startIcon={<ResetIcon />}
-            sx={{ marginTop: "1rem", fontWeight: 800 }}>
-            {t("general.reset")}
-          </Button>
-        </Stack>
+            <Button
+              color="error"
+              variant="contained"
+              onClick={handleResetForm}
+              startIcon={<ResetIcon />}
+              sx={{ marginTop: "1rem", fontWeight: 500, borderRadius: "1rem" }}>
+              {t("general.reset")}
+            </Button>
+          </Stack>
+        </Box>
       </Box>
     </Box>
   );
@@ -241,6 +249,7 @@ FidyahForm.propTypes = {
   headerElement: PropTypes.node,
   watch: PropTypes.func,
   handleResetForm: PropTypes.func,
+  id: PropTypes.string
 };
 
 export default FidyahForm;

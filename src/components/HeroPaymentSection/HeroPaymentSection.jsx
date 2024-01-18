@@ -1,42 +1,33 @@
 import Box from "@mui/material/Box";
-import HeroImage from "@fidyah/assets/images/svg/calculator.svg";
-import { useHeroSectionStyles } from "./_styles";
-import { Button, Stack, Typography, useTheme } from "@mui/material";
+import HeroImage from "@fidyah/assets/images/svg/payment.svg";
+import { useHeroPaymentSectionStyles } from "./_styles";
+import { Button, Stack, Typography } from "@mui/material";
 import { DrawerSettings } from "..";
 import { useState } from "react";
 import FaqImage from "@fidyah/assets/images/svg/faq.svg";
 import { useTranslation } from "react-i18next";
-import Header from "@fidyah/layouts/Header";
+import PropTypes from "prop-types";
 
-const HeroSection = () => {
+const HeroPaymentSection = ({ totalPayable }) => {
   const { t } = useTranslation();
-  const classes = useHeroSectionStyles();
-  const theme = useTheme();
+  const classes = useHeroPaymentSectionStyles();
   const [isOpenDrawerSetting, setIsOpenDrawerSetting] = useState(false);
 
   return (
-    <Box id="heroHome" className={classes.content}>
-      <Header />
-
+    <Box className={classes.content}>
       <img src={HeroImage} alt="hero" className={classes.contentImage} />
 
       <Box px="1rem">
         <Stack
           position="absolute"
           top="100px"
-          spacing={3}
+          spacing={1}
           className={classes.contentText}>
-          <Typography width="14rem">{t("hero.title")}</Typography>
+          <Typography width="14rem">{t("payment.title")}</Typography>
 
-          <Button
-            variant="outlined"
-            style={{
-              backgroundColor: "white",
-              width: "70%",
-              borderRadius: "1rem",
-            }}>
-            {t("button.getStarted")}
-          </Button>
+          <Typography variant="body2" width="14rem">
+            {t("general.totalpayablefidyah")} <b>{totalPayable}</b>
+          </Typography>
         </Stack>
       </Box>
 
@@ -49,7 +40,7 @@ const HeroSection = () => {
           <Typography>{t("hero.sectionBoxTitle")}</Typography>
           <Button
             variant="contained"
-            style={{ color: "white", width: theme.breakpoints.down("xs") ? "45%" : "35%", borderRadius: "1rem" }}
+            style={{ color: "white", width: "30%", borderRadius: "1rem" }}
             onClick={() => setIsOpenDrawerSetting(true)}>
             {t("button.changeHere")}
           </Button>
@@ -67,4 +58,8 @@ const HeroSection = () => {
   );
 };
 
-export default HeroSection;
+HeroPaymentSection.propTypes = {
+  totalPayable: PropTypes.string,
+};
+
+export default HeroPaymentSection;

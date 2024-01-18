@@ -71,3 +71,10 @@ export const PAYMENT_TYPE = {
   QRIS: "qris",
   MANUAL: "manual",
 };
+
+export const ASSETS = [
+  {
+    name: "Storyset",
+    link: "https://storyset.com/",
+  }
+];

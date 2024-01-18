@@ -74,6 +74,7 @@ const FidyahFormIllnesContainer = () => {
 
   return (
     <FidyahForm
+      id='illness'
       watch={watch}
       fields={fields}
       control={control}

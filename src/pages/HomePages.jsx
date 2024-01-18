@@ -4,12 +4,12 @@ import { setPayableHaid, setPayableIllness } from "@fidyah/context/actions";
 import { useStore } from "@fidyah/hooks/useStore";
 import { useNavigate } from "react-router-dom";
 import FidyahLayout from "@fidyah/layouts";
-import Header from "@fidyah/layouts/Header";
 import HeroSection from "@fidyah/components/HeroSection/HeroSection";
 import FidyahFormHaidContainer from "@fidyah/containers/FidyahFormHaidContainer";
 import FidyahFormIllnesContainer from "@fidyah/containers/FidyahFormIllnessContainer";
 import FidyahFormPregnancyContainer from "@fidyah/containers/FidyahFormPregnancyContainer";
 import MakePayment from "@fidyah/components/MakePayment";
+import FeatureSection from "@fidyah/components/FeatureSection/FeatureSection";
 
 const HomePages = () => {
   const navigate = useNavigate();
@@ -35,8 +35,8 @@ const HomePages = () => {
           onMakePayment={handleMakePayment}
         />
       }>
-      <Header />
       <HeroSection />
+      <FeatureSection />
       <Stack spacing={6}>
         <FidyahFormHaidContainer />
         <FidyahFormIllnesContainer />

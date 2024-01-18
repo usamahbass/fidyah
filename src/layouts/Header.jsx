@@ -19,7 +19,7 @@ const Header = () => {
   const [isOpenDrawerSetting, setIsOpenDrawerSetting] = useState(false);
 
   return (
-    <Box className={classes.header}>
+    <Box py="0.75rem" px="1rem" className={classes.header}>
       <img src="/vite.svg" alt="logo" />
 
       <Stack direction="row" spacing={1}>

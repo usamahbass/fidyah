@@ -1,7 +1,6 @@
 import { useTranslation } from "react-i18next";
-import { Box, Divider, Stack, TextField, Typography } from "@mui/material";
+import { Stack, TextField } from "@mui/material";
 import { MuiTelInput } from "mui-tel-input";
-import { usePaymentPageStyles } from "./_styles";
 import FidyahLayout from "@fidyah/layouts";
 import { toRupiah } from "@fidyah/utils/helpers";
 import { useTotalPayable } from "@fidyah/hooks/useTotalPayable";
@@ -19,6 +18,7 @@ import { enqueueSnackbar } from "notistack";
 import QRISDIalog from "@fidyah/components/QRISDialog/QRISDialog";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import HeroPaymentSection from "@fidyah/components/HeroPaymentSection/HeroPaymentSection";
 
 const PaymentManual = () => {
   const { t } = useTranslation();
@@ -29,7 +29,6 @@ const PaymentManual = () => {
   const [phoneInfo, setPhoneInfo] = useState(null);
   const [isOpenDialogQRIS, setIsOpenDialogQRIS] = useState(false);
 
-  const classes = usePaymentPageStyles(); 
   const totalPayable = useTotalPayable();
 
   const formSchema = yup.object().shape({
@@ -37,7 +36,7 @@ const PaymentManual = () => {
     email: yup
       .string()
       .email(t("inputError.emailNotValid"))
-      .required(t("inputError.emailRequired"))
+      .required(t("inputError.emailRequired")),
   });
 
   const {
@@ -55,28 +54,31 @@ const PaymentManual = () => {
     const phone_num = `0${phoneInfo.nationalNumber}`;
 
     if (phone_num.length < 8) {
-      return setError('phone_num', { message: t('inputError.noTelpMin') });
-    } 
-    
-    if (phone_num.length > 13) {
-      return setError('phone_num', { message: t('inputError.noTelpMax') });
+      return setError("phone_num", { message: t("inputError.noTelpMin") });
     }
-    
-    clearErrors('phone_num');
+
+    if (phone_num.length > 13) {
+      return setError("phone_num", { message: t("inputError.noTelpMax") });
+    }
+
+    clearErrors("phone_num");
 
     dispatch(setLoadingCreatePayment(true));
 
     requests
       .post("/api/palugada/fidyah/tambah-user", {
         ...values,
-        phone_num
+        phone_num,
       })
       .then(() => {
-        enqueueSnackbar("Pendaftaran berhasil, silakan bayar menggunakan QRIS !", {
-          variant: "success",
-          autoHideDuration: 10000,
-          hideIconVariant: true 
-        });
+        enqueueSnackbar(
+          "Pendaftaran berhasil, silakan bayar menggunakan QRIS !",
+          {
+            variant: "success",
+            autoHideDuration: 10000,
+            hideIconVariant: true,
+          }
+        );
 
         setIsOpenDialogQRIS(true);
       })
@@ -105,32 +107,8 @@ const PaymentManual = () => {
           onMakePayment={handleSubmit(handleMakePayment)}
         />
       }>
-      <Stack mb="2rem" alignItems="center">
-        <Box className={classes.hero}>
-          <Stack spacing={1} mb=".5rem">
-            <Typography
-              fontWeight={700}
-              textTransform="uppercase"
-              textAlign="center"
-              variant="body1">
-              {t("payment.title")}
-            </Typography>
-            <Typography fontWeight={500} textAlign="center" variant="caption">
-              {t("general.totalpayablefidyah")}
-            </Typography>
-          </Stack>
-
-          <Typography
-            fontWeight={700}
-            color="primary"
-            textAlign="center"
-            variant="h4">
-            {toRupiah(totalPayable)}
-          </Typography>
-
-          <Divider sx={{ marginTop: ".75rem", width: "50%" }} />
-        </Box>
-
+      <HeroPaymentSection totalPayable={toRupiah(totalPayable)} />
+      <Stack px="1rem" mb="2rem" alignItems="center">
         <Stack spacing={3} width="100%">
           <Controller
             name="name"

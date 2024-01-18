@@ -1,5 +1,5 @@
 {
-  "header.title": "Kalkulator Fidyah",
+  "header.title": "Fidyahku",
   "header.description": "Lakukan pembayaran fidyah untuk puasa yang terlewat selama ramadhan yang lalu",
   "settings.title": "Pengaturan",
   "settings.language.title": "Bahasa",
@@ -37,6 +37,7 @@
   "general.totalpayablefidyah": "Jumlah fidyah yang harus dibayar",
   "general.makepayment": "Buat Pembayaran",
   "general.or": "atau",
+  "general.assets": "Aset",
 
   "button.enrollManual": "Pembayaran Manual",
   "button.buy": "Bayar",
@@ -52,5 +53,14 @@
   "inputError.noTelpRequired": "Nomor telepone diperlukan !",
   "inputError.emailNotValid": "Email tidak valid !",
   "inputError.noTelpMin": "Nomor telepon minimal 9 angka !",
-  "inputError.noTelpMax": "Nomor telepon maksimal 13 angka !"
+  "inputError.noTelpMax": "Nomor telepon maksimal 13 angka !",
+
+  "hero.title": "Nikmati beragam cara menghitung fidyah di aplikasi Fidyahku",
+  "button.getStarted": "Mulai sekarang",
+  "hero.sectionBoxTitle": "Ingin mengubah bahasa pada aplikasi fidyahku, atau ubah tema?",
+  "button.changeHere": "Ubah disini",
+  "featureSection.title": "Mau bayar fidyah apa hari ini?",
+  "featureSection.haid": "Haid",
+  "featureSection.illness": "Penyakit / Usia Tua",
+  "featureSection.pregnancy": "Ibu Hamil"
 }
