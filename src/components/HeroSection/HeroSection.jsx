@@ -10,7 +10,7 @@ const HeroSection = () => {
 
   return (
     <Box className={classes.content}>
-      <Typography
+      {/* <Typography
         fontWeight={700}
         textTransform="uppercase"
         textAlign="center"
@@ -22,7 +22,7 @@ const HeroSection = () => {
         {t("header.description")}
       </Typography>
 
-      <Divider sx={{ marginTop: ".75rem", width: "50%" }} />
+      <Divider sx={{ marginTop: ".75rem", width: "50%" }} /> */}
     </Box>
   );
 };

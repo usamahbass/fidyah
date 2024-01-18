@@ -14,8 +14,8 @@
   "form.headerleft.haid.description": "Hari menuju Qadha'",
   "form.headerleft.illness.title": "Penyakit atau Usia Tua",
   "form.headerleft.illness.description": "Perhitungan bagi yang sakit",
-  "form.headerleft.pregnancy.title": "Ibu Hamil / Menyusui",
-  "form.headerleft.pregnancy.description": "Perhitungan bagi ibu hamil / menyusui",
+  "form.headerleft.pregnancy.title": "Ibu Hamil",
+  "form.headerleft.pregnancy.description": "Perhitungan bagi ibu hamil",
   "form.headerright.title": "Total Hutang",
   "general.year": "Tahun",
   "form.yearnotfasting": "Tahun tidak puasa",
@@ -38,5 +38,19 @@
   "general.makepayment": "Buat Pembayaran",
   "general.or": "atau",
 
-  "payment.title": "Silakan mendaftar dengan detail Anda untuk melanjutkan pembayaran."
+  "button.enrollManual": "Pembayaran Manual",
+  "button.buy": "Bayar",
+
+  "label.name": "Nama",
+  "label.email": "Email",
+  "label.noTelp": "Nomor Telepone",
+
+  "payment.title": "Silakan mendaftar dengan detail Anda untuk melanjutkan pembayaran.",
+
+  "inputError.nameRequired": "Nama diperlukan !",
+  "inputError.emailRequired": "Email diperlukan !",
+  "inputError.noTelpRequired": "Nomor telepone diperlukan !",
+  "inputError.emailNotValid": "Email tidak valid !",
+  "inputError.noTelpMin": "Nomor telepon minimal 9 angka !",
+  "inputError.noTelpMax": "Nomor telepon maksimal 13 angka !"
 }

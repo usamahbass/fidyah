@@ -66,3 +66,8 @@ export const REPOSITORIES = [
     github: "https://github.com/nouvalkaff/fidyahCalculator",
   },
 ];
+
+export const PAYMENT_TYPE = {
+  QRIS: "qris",
+  MANUAL: "manual",
+};

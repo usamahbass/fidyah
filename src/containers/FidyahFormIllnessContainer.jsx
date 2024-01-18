@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
 import { useStore } from "@fidyah/hooks/useStore";
 import FidyahForm from "@fidyah/components/FidyahForm";
@@ -8,7 +8,7 @@ import FidyahFormHeader from "@fidyah/components/FidyahForm/FidyahFormHeader";
 import get from "lodash/get";
 import isEmpty from "lodash/isEmpty";
 import { requests } from "@fidyah/utils/requests";
-import { setPayableIllness } from "@fidyah/context/actions";
+import { setLoadingCalculateIllnessFidyah, setPayableIllness } from "@fidyah/context/actions";
 
 const FidyahFormIllnesContainer = () => {
   const { state, dispatch } = useStore();
@@ -19,8 +19,6 @@ const FidyahFormIllnesContainer = () => {
   });
 
   const { t } = useTranslation();
-
-  const [loadingCalculateFidyah, setLoadingCalculateFidyah] = useState(false);
 
   const renderWatchData = fields.map((_, fieldIdx) =>
     watch(`data[${fieldIdx}].days`)
@@ -36,18 +34,18 @@ const FidyahFormIllnesContainer = () => {
   };
 
   const handleCalculateFidyahFormIllness = async (values) => {
-    setLoadingCalculateFidyah(true);
+    dispatch(setLoadingCalculateIllnessFidyah(true));
 
     try {
       const response = await requests.post(
-        "/api/palugada/hitung-fidyah?oldill=1",
+        "/api/palugada/fidyah/hitung?oldill=1",
         values
       );
 
       const totalPayable = get(response.data, "totalBayar", 0);
       dispatch(setPayableIllness(totalPayable));
     } finally {
-      setLoadingCalculateFidyah(false);
+      dispatch(setLoadingCalculateIllnessFidyah(false));
     }
   };
 
@@ -71,7 +69,7 @@ const FidyahFormIllnesContainer = () => {
   }, []);
 
   const {
-    payable: { illness: illnessTotal },
+    payable: { illness: illnessTotal } = {},
   } = state;
 
   return (
@@ -86,8 +84,8 @@ const FidyahFormIllnesContainer = () => {
         <FidyahFormHeader
           daysCount={false}
           totalPayable={illnessTotal}
-          loadingPayable={loadingCalculateFidyah}
           title={t("form.headerleft.illness.title")}
+          loadingPayable={state.loading?.calculateFidyah?.illness}
           description={t("form.headerleft.illness.description")}
           icon={<HeartBrokenIcon fontSize="large" color="primary" />}
         />

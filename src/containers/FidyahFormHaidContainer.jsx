@@ -1,7 +1,7 @@
 import FidyahForm from "@fidyah/components/FidyahForm";
 import FidyahFormHeader from "@fidyah/components/FidyahForm/FidyahFormHeader";
 import { sumArrayOfObject } from "@fidyah/utils/helpers";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import EventAvailableOutlinedIcon from "@mui/icons-material/EventAvailableOutlined";
@@ -9,7 +9,7 @@ import { useStore } from "@fidyah/hooks/useStore";
 import get from "lodash/get";
 import isEmpty from "lodash/isEmpty";
 import { requests } from "@fidyah/utils/requests";
-import { setPayableHaid } from "@fidyah/context/actions";
+import { setLoadingCalculateHaidFidyah, setPayableHaid } from "@fidyah/context/actions";
 
 const FidyahFormHaidContainer = () => {
   const { t } = useTranslation();
@@ -26,21 +26,19 @@ const FidyahFormHaidContainer = () => {
     watch(`data[${fieldIdx}].days`)
   );
 
-  const [loadingCalculateFidyah, setLoadingCalculateFidyah] = useState(false);
-
   const handleCalculateFidyahFormHaid = async (values) => {
-    setLoadingCalculateFidyah(true);
+    dispatch(setLoadingCalculateHaidFidyah(true));
 
     try {
       const response = await requests.post(
-        "/api/palugada/hitung-fidyah?oldill=0",
+        "/api/palugada/fidyah/hitung?oldill=0",
         values
       );
 
       const totalPayable = get(response.data, "totalBayar", 0);
       dispatch(setPayableHaid(totalPayable));
     } finally {
-      setLoadingCalculateFidyah(false);
+      dispatch(setLoadingCalculateHaidFidyah(false));
     }
   };
 
@@ -82,7 +80,7 @@ const FidyahFormHaidContainer = () => {
   const sumTotalDaysInData = sumArrayOfObject(currentData, "days");
 
   const {
-    payable: { haid: haidTotal },
+    payable: { haid: haidTotal } = {},
   } = state;
 
   return (
@@ -98,7 +96,7 @@ const FidyahFormHaidContainer = () => {
           totalPayable={haidTotal}
           daysCount={sumTotalDaysInData}
           title={t("form.headerleft.haid.title")}
-          loadingPayable={loadingCalculateFidyah}
+          loadingPayable={state?.loading?.calculateFidyah?.haid}
           description={t("form.headerleft.haid.description")}
           icon={<EventAvailableOutlinedIcon fontSize="large" color="primary" />}
         />

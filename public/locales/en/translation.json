@@ -38,5 +38,19 @@
   "general.makepayment": "Make Payment",
   "general.or": "or",
 
-  "payment.title": "Please enrol with your details to continue with payment."
+  "button.enrollManual": "Manual Payment",
+  "button.buy": "Buy",
+
+  "label.name": "Name",
+  "label.email": "Email",
+  "label.noTelp": "Telephone Number",
+
+  "payment.title": "Please enrol with your details to continue with payment.",
+
+  "inputError.nameRequired": "Name required !",
+  "inputError.emailRequired": "Email required !",
+  "inputError.noTelpRequired": "Telephone number required !",
+  "inputError.emailNotValid": "Email not valid !",
+  "inputError.noTelpMin": "Phone number must be at least 9 digits !",
+  "inputError.noTelpMax": "Phone number up to 13 digits !"
 }

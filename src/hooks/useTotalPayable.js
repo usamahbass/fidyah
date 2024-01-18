@@ -7,9 +7,9 @@ export const useTotalPayable = () => {
     state: { payable: payableState },
   } = useStore();
 
-  const totalHaidPayment = get(payableState.haid, "bayarFidyah", "0");
-  const totalIlnessPayment = get(payableState.illness, "bayarFidyah", "0");
-  const totalPregNancyAjram = get(payableState.pregnancy, "bayarFidyah", "0");
+  const totalHaidPayment = get(payableState?.haid, "bayarFidyah", "0");
+  const totalIlnessPayment = get(payableState?.illness, "bayarFidyah", "0");
+  const totalPregNancyAjram = get(payableState?.pregnancy, "bayarFidyah", "0");
 
   const totalPayment =
     rupiahToInt(totalHaidPayment) +
