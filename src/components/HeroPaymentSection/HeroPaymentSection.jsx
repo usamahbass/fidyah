@@ -34,7 +34,7 @@ const HeroPaymentSection = ({ totalPayable }) => {
           justifyContent="end"
           p="1rem"
           className={classes.overlayBox}>
-          <Typography variant="body2" component="blockquote">{t("general.noteFidyahBaznas")}</Typography>
+          <Typography variant="caption" component="blockquote">{t("general.noteFidyahBaznas")}</Typography>
           <Button
             variant="contained"
             style={{ color: "white", width: "45%", borderRadius: "1rem" }}
