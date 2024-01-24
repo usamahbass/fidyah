@@ -1,19 +1,24 @@
 import FidyahForm from "@fidyah/components/FidyahForm";
 import FidyahFormHeader from "@fidyah/components/FidyahForm/FidyahFormHeader";
-import { sumArrayOfObject, sumRupiah } from "@fidyah/utils/helpers";
+import { sumArrayOfObject } from "@fidyah/utils/helpers";
 import { useEffect } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import EventAvailableOutlinedIcon from "@mui/icons-material/EventAvailableOutlined";
 import { useStore } from "@fidyah/hooks/useStore";
 import get from "lodash/get";
-import isEmpty from "lodash/isEmpty";
 import { requests } from "@fidyah/utils/requests";
-import { setLoadingCalculateHaidFidyah, setPayableHaid } from "@fidyah/context/actions";
+import {
+  removePayableHaid,
+  resetPayableHaid,
+  setLoadingCalculateHaidFidyah,
+  setPayableHaid,
+} from "@fidyah/context/actions";
+import { DEFAULT_PAYABLE_STATE, INIT_PAYABLE } from "@fidyah/utils/constants";
 
 const FidyahFormHaidContainer = () => {
   const { t } = useTranslation();
-  const { control, watch, getValues, reset: resetForm, setValue: setValueForm } = useForm();
+  const { control, watch, reset: resetForm } = useForm();
   const { state, dispatch } = useStore();
   const { fields, append, remove, prepend } = useFieldArray({
     control,
@@ -22,55 +27,50 @@ const FidyahFormHaidContainer = () => {
 
   const currentData = watch("data");
 
-  const renderWatchData = fields.map((_, fieldIdx) =>
-    watch(`data[${fieldIdx}].days`)
-  );
-
-  const handleCalculateFidyahFormHaid = async (values) => {
+  const handleCalculateFidyahFormHaid = async (values, index) => {
     dispatch(setLoadingCalculateHaidFidyah(true));
 
     try {
       const response = await requests.post(
         "/api/palugada/fidyah/hitung?oldill=0",
-        values
+        [values]
       );
 
-      const totalPayable = {
-        ...get(response.data, "totalBayar", {}),
-        bayarFidyah: sumRupiah(response.data.totalBayar.bayarFidyah, state.payable.haid?.bayarFidyah ?? 'Rp 0')
+      const responseData = get(response.data, "totalBayar", {});
+
+      const payloadToDispatch = {
+        index,
+        data: { id: index + 1, ...responseData },
       };
-      
-      dispatch(setPayableHaid(totalPayable));
-      setValueForm(`haid.${state.activeIndex}.qty`, totalPayable?.qty);
-      setValueForm(`haid.${state.activeIndex}.amount`, totalPayable?.bayarFidyah);
+
+      dispatch(setPayableHaid(payloadToDispatch));
     } finally {
       dispatch(setLoadingCalculateHaidFidyah(false));
     }
   };
 
-  const handleDeleteYearForm = (fieldIdx) => {
-    remove(fieldIdx);
-
-    const getValuesFormData = get(getValues(), "data", []);
-
-    // callback calculate function
-    handleCalculateFidyahFormHaid(getValuesFormData);
+  const handleDeleteYearForm = (index) => {
+    remove(index);
+    dispatch(removePayableHaid({ index }));
   };
-  const handleAddYearForm = () => append({ year: "", days: 0 });
+
+  const handleAddYearForm = () => {
+    const payableHaidLength = state.payable.haid.length;
+
+    append({ year: "", days: 0 });
+    dispatch(
+      setPayableHaid({
+        index: payableHaidLength + 1,
+        data: { id: payableHaidLength + 1, ...INIT_PAYABLE },
+      })
+    );
+  };
 
   const handleResetFormFidyahHaid = () => {
     resetForm();
     prepend({ year: "", days: 0 });
-    dispatch(setPayableHaid(0));
+    dispatch(resetPayableHaid([DEFAULT_PAYABLE_STATE]));
   };
-
-  useEffect(() => {
-    if (!isEmpty(renderWatchData)) {
-      const getValuesFormData = get(getValues(), "data", []);
-
-      handleCalculateFidyahFormHaid(getValuesFormData);
-    }
-  }, renderWatchData);
 
   useEffect(() => {
     let mounted = true;
@@ -85,9 +85,7 @@ const FidyahFormHaidContainer = () => {
 
   const sumTotalDaysInData = sumArrayOfObject(currentData, "days");
 
-  const {
-    payable: { haid: haidTotal } = {},
-  } = state;
+  const { payable: { haid: haidTotal } = [] } = state;
 
   return (
     <FidyahForm
@@ -98,13 +96,14 @@ const FidyahFormHaidContainer = () => {
       handleAddYear={handleAddYearForm}
       handleDeleteYear={handleDeleteYearForm}
       handleResetForm={handleResetFormFidyahHaid}
+      handleRequestToApi={handleCalculateFidyahFormHaid}
       headerElement={
         <FidyahFormHeader
           totalPayable={haidTotal}
           daysCount={sumTotalDaysInData}
           title={t("form.headerleft.haid.title")}
-          loadingPayable={state?.loading?.calculateFidyah?.haid}
           description={t("form.headerleft.haid.description")}
+          loadingPayable={state?.loading?.calculateFidyah?.haid}
           icon={<EventAvailableOutlinedIcon fontSize="large" color="primary" />}
         />
       }

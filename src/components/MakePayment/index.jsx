@@ -1,7 +1,6 @@
 import { Skeleton, Stack, Typography } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import { toRupiah } from "@fidyah/utils/helpers";
 import { useTotalPayable } from "@fidyah/hooks/useTotalPayable";
 import { useStore } from "@fidyah/hooks/useStore";
 import PropTypes from "prop-types";
@@ -44,7 +43,7 @@ const MakePayment = ({ onMakePayment, title, isLoadingButton }) => {
             <Skeleton sx={{ width: "150px" }} />
           ) : (
             <Typography fontSize="1.5rem" color="primary" fontWeight={700}>
-              {toRupiah(totalPayable)}
+              {totalPayable}
             </Typography>
           )}
         </Stack>

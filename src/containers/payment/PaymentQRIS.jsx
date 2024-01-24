@@ -3,7 +3,6 @@ import { Box, Button, Divider, Stack, Typography } from "@mui/material";
 import { usePaymentPageStyles } from "./_styles";
 import QrisImage from "@fidyah/assets/qris.jpeg";
 import FidyahLayout from "@fidyah/layouts";
-import { toRupiah } from "@fidyah/utils/helpers";
 import { useStore } from "@fidyah/hooks/useStore";
 import { useTotalPayable } from "@fidyah/hooks/useTotalPayable";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
@@ -42,7 +41,7 @@ const PaymentQRIS = () => {
             color="primary"
             textAlign="center"
             variant="h4">
-            {toRupiah(totalPayable)}
+            {totalPayable}
           </Typography>
 
           <Divider sx={{ marginTop: ".75rem", width: "50%" }} />

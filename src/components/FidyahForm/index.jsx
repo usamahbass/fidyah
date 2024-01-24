@@ -19,7 +19,7 @@ import CounterForm from "../CounterForm/CounterForm";
 import { Controller } from "react-hook-form";
 import ResetIcon from "@mui/icons-material/Refresh";
 import { useStore } from "@fidyah/hooks/useStore";
-import { setActiveIndex } from "@fidyah/context/actions";
+import isEmpty from "lodash/isEmpty";
 
 const FidyahForm = ({
   fields,
@@ -30,11 +30,16 @@ const FidyahForm = ({
   watch,
   handleResetForm,
   id,
+  handleRequestToApi
 }) => {
   const { t } = useTranslation();
   const classes = useFidyahFormStyles();
   const watchFormData = watch("data", []);
-  const { dispatch } = useStore();
+
+  const { state } = useStore();
+
+  const payableState = state.payable;
+  const payableStateCurrent = payableState[id];
 
   const watchFormDataYear = watchFormData?.map((data) => data.year);
 
@@ -45,6 +50,7 @@ const FidyahForm = ({
         <Box className={classes.formContent}>
           <Stack spacing={3}>
             {fields.map((field, fieldIdx) => {
+              const watchCurrentDayValue = watch(`data.${fieldIdx}.days`);
               const watchCurrentYearValue = watch(`data.${fieldIdx}.year`);
 
               return (
@@ -98,7 +104,10 @@ const FidyahForm = ({
                                 placeholder={t("general.select")}
                                 onChange={(e) => {
                                   onChange(e.target.value);
-                                  dispatch(setActiveIndex(fieldIdx));
+
+                                  if (watchCurrentDayValue) {
+                                    handleRequestToApi({ days: watchCurrentDayValue, year: e.target.value }, fieldIdx);
+                                  }
                                 }}
                                 renderValue={(selected) => {
                                   if (selected.length === 0) {
@@ -147,7 +156,7 @@ const FidyahForm = ({
                                 value={value}
                                 onChange={(val) => {
                                   onChange(val);
-                                  dispatch(setActiveIndex(fieldIdx));
+                                  handleRequestToApi({ days: val, year: watchCurrentYearValue }, fieldIdx);
                                 }}
                                 disabled={!watchCurrentYearValue}
                               />
@@ -170,19 +179,12 @@ const FidyahForm = ({
                             {t("form.quantity")}
                           </FormLabel>
 
-                          <Controller
-                            control={control}
-                            defaultValue="0"
-                            name={`${id}.${fieldIdx}.qty`}
-                            render={({ field: { value } }) => (
-                              <Typography
-                                color="primary"
-                                variant="h6"
-                                fontWeight={800}>
-                                {value}
-                              </Typography>
-                            )}
-                          />
+                          <Typography
+                            color="primary"
+                            variant="h6"
+                            fontWeight={800}>
+                            {payableStateCurrent?.[fieldIdx]?.qty ?? "0"}
+                          </Typography>
                         </FormControl>
 
                         <FormControl
@@ -203,19 +205,13 @@ const FidyahForm = ({
                             {t("form.amount")}
                           </FormLabel>
 
-                          <Controller
-                            control={control}
-                            defaultValue="Rp. 0"
-                            name={`${id}.${fieldIdx}.amount`}
-                            render={({ field: { value } }) => (
-                              <Typography
-                                color="primary"
-                                variant="h6"
-                                fontWeight={800}>
-                                {value}
-                              </Typography>
-                            )}
-                          />
+                          <Typography
+                            color="primary"
+                            variant="h6"
+                            fontWeight={800}>
+                            {payableStateCurrent?.[fieldIdx]?.bayarFidyah ??
+                              "Rp 0"}
+                          </Typography>
                         </FormControl>
                       </Stack>
                     </Stack>
@@ -250,6 +246,7 @@ const FidyahForm = ({
               variant="contained"
               onClick={handleResetForm}
               startIcon={<ResetIcon />}
+              disabled={isEmpty(payableStateCurrent)}
               sx={{ marginTop: "1rem", fontWeight: 500, borderRadius: "1rem" }}>
               {t("general.reset")}
             </Button>
@@ -269,6 +266,7 @@ FidyahForm.propTypes = {
   watch: PropTypes.func,
   handleResetForm: PropTypes.func,
   id: PropTypes.string,
+  handleRequestToApi: PropTypes.func
 };
 
 export default FidyahForm;
