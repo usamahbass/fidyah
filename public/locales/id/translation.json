@@ -46,7 +46,7 @@
   "label.email": "Email",
   "label.noTelp": "Nomor Telepone",
 
-  "payment.title": "Silakan mendaftar dengan detail Anda untuk melanjutkan pembayaran.",
+  "payment.title": "Silakan mendaftar untuk melanjutkan pembayaran.",
 
   "inputError.nameRequired": "Nama diperlukan !",
   "inputError.emailRequired": "Email diperlukan !",
@@ -66,5 +66,5 @@
 
   "general.fillPersonalData": "Isi Data Diri",
   "general.noteFidyahBaznas": "Berdasarkan SK Ketua BAZNAS No. 07 Tahun 2023 tentang Zakat Fitrah dan Fidyah untuk wilayah Ibukota DKI Jakarta Raya dan Sekitarnya, ditetapkan bahwa nilai fidyah dalam bentuk uang sebesar Rp60.000,-/hari/jiwa.",
-  "button.learnMore": "Pelajari lebih lanjut"
+  "button.learnMore": "Pelajari disini"
 }
