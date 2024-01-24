@@ -9,10 +9,11 @@ import get from "lodash/get";
 import isEmpty from "lodash/isEmpty";
 import { requests } from "@fidyah/utils/requests";
 import { setLoadingCalculateIllnessFidyah, setPayableIllness } from "@fidyah/context/actions";
+import { sumRupiah } from "@fidyah/utils/helpers";
 
 const FidyahFormIllnesContainer = () => {
   const { state, dispatch } = useStore();
-  const { control, watch, getValues, reset: resetForm } = useForm();
+  const { control, watch, getValues, reset: resetForm, setValue: setValueForm } = useForm();
   const { fields, append, remove, prepend } = useFieldArray({
     control,
     name: "data",
@@ -42,8 +43,14 @@ const FidyahFormIllnesContainer = () => {
         values
       );
 
-      const totalPayable = get(response.data, "totalBayar", 0);
+      const totalPayable = {
+        ...get(response.data, "totalBayar", {}),
+        bayarFidyah: sumRupiah(response.data.totalBayar.bayarFidyah, state.payable.illness?.bayarFidyah ?? 'Rp 0')
+      };
+
       dispatch(setPayableIllness(totalPayable));
+      setValueForm(`illness.${state.activeIndex}.qty`, totalPayable?.qty);
+      setValueForm(`illness.${state.activeIndex}.amount`, totalPayable?.bayarFidyah);
     } finally {
       dispatch(setLoadingCalculateIllnessFidyah(false));
     }

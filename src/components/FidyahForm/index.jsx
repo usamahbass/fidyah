@@ -18,6 +18,8 @@ import { generateYears } from "@fidyah/utils/helpers";
 import CounterForm from "../CounterForm/CounterForm";
 import { Controller } from "react-hook-form";
 import ResetIcon from "@mui/icons-material/Refresh";
+import { useStore } from "@fidyah/hooks/useStore";
+import { setActiveIndex } from "@fidyah/context/actions";
 
 const FidyahForm = ({
   fields,
@@ -27,11 +29,12 @@ const FidyahForm = ({
   headerElement,
   watch,
   handleResetForm,
-  id
+  id,
 }) => {
   const { t } = useTranslation();
   const classes = useFidyahFormStyles();
   const watchFormData = watch("data", []);
+  const { dispatch } = useStore();
 
   const watchFormDataYear = watchFormData?.map((data) => data.year);
 
@@ -43,10 +46,6 @@ const FidyahForm = ({
           <Stack spacing={3}>
             {fields.map((field, fieldIdx) => {
               const watchCurrentYearValue = watch(`data.${fieldIdx}.year`);
-              const watchCurrentDayValue = watch(`data.${fieldIdx}.days`);
-
-              const quantityValue =
-                watchCurrentDayValue === 0 ? "-" : watchCurrentDayValue;
 
               return (
                 <Collapse mountOnEnter unmountOnExit key={field.id} in>
@@ -97,7 +96,10 @@ const FidyahForm = ({
                                 id="select-year"
                                 sx={{ fontSize: ".90rem" }}
                                 placeholder={t("general.select")}
-                                onChange={(e) => onChange(e.target.value)}
+                                onChange={(e) => {
+                                  onChange(e.target.value);
+                                  dispatch(setActiveIndex(fieldIdx));
+                                }}
                                 renderValue={(selected) => {
                                   if (selected.length === 0) {
                                     return t("general.select");
@@ -143,7 +145,10 @@ const FidyahForm = ({
                             render={({ field: { onChange, value } }) => (
                               <CounterForm
                                 value={value}
-                                onChange={onChange}
+                                onChange={(val) => {
+                                  onChange(val);
+                                  dispatch(setActiveIndex(fieldIdx));
+                                }}
                                 disabled={!watchCurrentYearValue}
                               />
                             )}
@@ -165,12 +170,19 @@ const FidyahForm = ({
                             {t("form.quantity")}
                           </FormLabel>
 
-                          <Typography
-                            color="primary"
-                            variant="h6"
-                            fontWeight={800}>
-                            {quantityValue}
-                          </Typography>
+                          <Controller
+                            control={control}
+                            defaultValue="0"
+                            name={`${id}.${fieldIdx}.qty`}
+                            render={({ field: { value } }) => (
+                              <Typography
+                                color="primary"
+                                variant="h6"
+                                fontWeight={800}>
+                                {value}
+                              </Typography>
+                            )}
+                          />
                         </FormControl>
 
                         <FormControl
@@ -191,12 +203,19 @@ const FidyahForm = ({
                             {t("form.amount")}
                           </FormLabel>
 
-                          <Typography
-                            color="primary"
-                            variant="h6"
-                            fontWeight={800}>
-                            -
-                          </Typography>
+                          <Controller
+                            control={control}
+                            defaultValue="Rp. 0"
+                            name={`${id}.${fieldIdx}.amount`}
+                            render={({ field: { value } }) => (
+                              <Typography
+                                color="primary"
+                                variant="h6"
+                                fontWeight={800}>
+                                {value}
+                              </Typography>
+                            )}
+                          />
                         </FormControl>
                       </Stack>
                     </Stack>
@@ -249,7 +268,7 @@ FidyahForm.propTypes = {
   headerElement: PropTypes.node,
   watch: PropTypes.func,
   handleResetForm: PropTypes.func,
-  id: PropTypes.string
+  id: PropTypes.string,
 };
 
 export default FidyahForm;

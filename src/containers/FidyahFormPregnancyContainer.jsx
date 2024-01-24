@@ -10,13 +10,13 @@ import isEmpty from "lodash/isEmpty";
 import { requests } from "@fidyah/utils/requests";
 import {
   setLoadingCalculatePregnancyFidyah,
-  setPayableIllness,
   setPayablePregNancy,
 } from "@fidyah/context/actions";
+import { sumRupiah } from "@fidyah/utils/helpers";
 
 const FidyahFormPregnancyContainer = () => {
   const { state, dispatch } = useStore();
-  const { control, watch, getValues, reset: resetForm } = useForm();
+  const { control, watch, getValues, reset: resetForm, setValue: setValueForm } = useForm();
   const { fields, append, remove, prepend } = useFieldArray({
     control,
     name: "data",
@@ -34,7 +34,7 @@ const FidyahFormPregnancyContainer = () => {
   const handleResetFormFidyahIllness = () => {
     resetForm();
     prepend({ year: "", days: 0 });
-    dispatch(setPayableIllness(0));
+    dispatch(setPayablePregNancy(0));
   };
 
   const handleCalculateFidyahFormIllness = async (values) => {
@@ -42,12 +42,18 @@ const FidyahFormPregnancyContainer = () => {
 
     try {
       const response = await requests.post(
-        "/api/palugada/fidyah/hitung?oldill=1",
+        "/api/palugada/fidyah/hitung?oldill=0",
         values
       );
 
-      const totalPayable = get(response.data, "totalBayar", 0);
+      const totalPayable = {
+        ...get(response.data, "totalBayar", {}),
+        bayarFidyah: sumRupiah(response.data.totalBayar.bayarFidyah, state.payable.pregnancy?.bayarFidyah ?? 'Rp 0')
+      };
+
       dispatch(setPayablePregNancy(totalPayable));
+      setValueForm(`pregnancy.${state.activeIndex}.qty`, totalPayable?.qty);
+      setValueForm(`pregnancy.${state.activeIndex}.amount`, totalPayable?.bayarFidyah);
     } finally {
       dispatch(setLoadingCalculatePregnancyFidyah(false));
     }

@@ -40,6 +40,23 @@ const FidyahFormHeader = ({
   return (
     <Box className={classes.header}>
       <Box className={classes.headerLeft}>
+        <PaymentsOutlinedIcon fontSize="large" color="primary" />
+
+        <Stack>
+          <Typography fontWeight={700} variant="body2">
+            {t("form.headerright.title")}
+          </Typography>
+          {loadingPayable ? (
+            <Skeleton />
+          ) : (
+            <Typography fontWeight={700} color="primary" variant="caption">
+              {totalFidyah}
+            </Typography>
+          )}
+        </Stack>
+      </Box>
+
+      <Box className={classes.headerRight}>
         {icon}
 
         <Stack>
@@ -55,23 +72,6 @@ const FidyahFormHeader = ({
                   {daysCount} {t("general.days")}
                 </Typography>
               )}
-            </Typography>
-          )}
-        </Stack>
-      </Box>
-
-      <Box className={classes.headerRight}>
-        <PaymentsOutlinedIcon fontSize="large" color="primary" />
-
-        <Stack>
-          <Typography fontWeight={700} variant="body2">
-            {t("form.headerright.title")}
-          </Typography>
-          {loadingPayable ? (
-            <Skeleton />
-          ) : (
-            <Typography fontWeight={700} color="primary" variant="caption">
-              {totalFidyah}
             </Typography>
           )}
         </Stack>

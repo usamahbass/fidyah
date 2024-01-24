@@ -9,7 +9,6 @@ import Divider from "@mui/material/Divider";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
-import Dev from "./Dev";
 import Repositories from "./Repositories";
 import Assets from "./Assets";
 
@@ -45,16 +44,6 @@ const DevDialog = ({ isOpen, handleClose }) => {
             <ListItemText
               primary={t("general.repositories")}
               secondary={<Repositories />}
-              secondaryTypographyProps={{
-                marginTop: ".5rem",
-              }}
-            />
-          </ListItem>
-
-          <ListItem>
-            <ListItemText
-              primary={t("general.developer")}
-              secondary={<Dev />}
               secondaryTypographyProps={{
                 marginTop: ".5rem",
               }}

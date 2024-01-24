@@ -1,6 +1,7 @@
 import { PAYMENT_TYPE } from "@fidyah/utils/constants";
 import {
   RESET_STORE_DATA,
+  SET_ACTIVE_INDEX,
   SET_APP_CURRENCY,
   SET_APP_THEME,
   SET_LOADING_CALCULATE_HAID_FIDYAH,
@@ -30,6 +31,7 @@ export const initialState = {
     },
   },
   paymentType: PAYMENT_TYPE.QRIS,
+  activeIndex: 0,
 };
 
 export const reducer = (state = initialState, action) => {
@@ -92,6 +94,8 @@ export const reducer = (state = initialState, action) => {
           },
         },
       };
+    case SET_ACTIVE_INDEX:
+      return { ...state, activeIndex: action.payload }
     default:
       return state;
   }

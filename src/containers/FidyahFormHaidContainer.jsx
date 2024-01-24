@@ -1,6 +1,6 @@
 import FidyahForm from "@fidyah/components/FidyahForm";
 import FidyahFormHeader from "@fidyah/components/FidyahForm/FidyahFormHeader";
-import { sumArrayOfObject } from "@fidyah/utils/helpers";
+import { sumArrayOfObject, sumRupiah } from "@fidyah/utils/helpers";
 import { useEffect } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -13,7 +13,7 @@ import { setLoadingCalculateHaidFidyah, setPayableHaid } from "@fidyah/context/a
 
 const FidyahFormHaidContainer = () => {
   const { t } = useTranslation();
-  const { control, watch, getValues, reset: resetForm } = useForm();
+  const { control, watch, getValues, reset: resetForm, setValue: setValueForm } = useForm();
   const { state, dispatch } = useStore();
   const { fields, append, remove, prepend } = useFieldArray({
     control,
@@ -35,8 +35,14 @@ const FidyahFormHaidContainer = () => {
         values
       );
 
-      const totalPayable = get(response.data, "totalBayar", 0);
+      const totalPayable = {
+        ...get(response.data, "totalBayar", {}),
+        bayarFidyah: sumRupiah(response.data.totalBayar.bayarFidyah, state.payable.haid?.bayarFidyah ?? 'Rp 0')
+      };
+      
       dispatch(setPayableHaid(totalPayable));
+      setValueForm(`haid.${state.activeIndex}.qty`, totalPayable?.qty);
+      setValueForm(`haid.${state.activeIndex}.amount`, totalPayable?.bayarFidyah);
     } finally {
       dispatch(setLoadingCalculateHaidFidyah(false));
     }

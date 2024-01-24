@@ -12,10 +12,11 @@ export const useFidyahFormStyles = makeStyles((theme) => {
     },
     header: {
       display: "flex",
-      alignItems: "center",
+      flexDirection: "column",
       position: "sticky",
       top: 0,
-      padding: "1rem",
+      gap: '1rem',
+      padding: "1rem 2rem",
       backgroundColor: theme.palette.background.default,
       transition: "all .3s",
       zIndex: 99,

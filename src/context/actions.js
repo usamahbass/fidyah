@@ -1,5 +1,6 @@
 import {
   RESET_STORE_DATA,
+  SET_ACTIVE_INDEX,
   SET_APP_CURRENCY,
   SET_APP_THEME,
   SET_LOADING_CALCULATE_HAID_FIDYAH,
@@ -65,4 +66,9 @@ export const setLoadingCalculateIllnessFidyah = (loadingCalculateFidyah) => ({
 export const setLoadingCalculatePregnancyFidyah = (loadingCalculateFidyah) => ({
   type: SET_LOADING_CALCULATE_PREGNANCY_FIDYAH,
   payload: loadingCalculateFidyah,
+});
+
+export const setActiveIndex = (activeIndex) => ({
+  type: SET_ACTIVE_INDEX,
+  payload: activeIndex,
 });
