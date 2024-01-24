@@ -1,6 +1,4 @@
-# Fidyah Calculator UI (Palugada Project)
-
-<img src="./public/ss.png" alt="screenshoot" />
+# Fidyahku UI
 
 > Aplikasi untuk membantu kamu menghitung bayaran fidyah berdasarkan haid / sakit / orang yang sudah tua. Tambahkan tahun, jumlah haid / sakit dan lihat jumlah yang harus dibayar.
 
