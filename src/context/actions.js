@@ -1,5 +1,13 @@
 import {
+  REMOVE_PAYABLE_HAID,
+  REMOVE_PAYABLE_ILLNESS,
+  REMOVE_PAYABLE_PREGNANCY,
+  RESET_PAYABLE_DATA,
+  RESET_PAYABLE_HAID,
+  RESET_PAYABLE_ILLNESS,
+  RESET_PAYABLE_PREGNANCY,
   RESET_STORE_DATA,
+  SET_ACTIVE_INDEX,
   SET_APP_CURRENCY,
   SET_APP_THEME,
   SET_LOADING_CALCULATE_HAID_FIDYAH,
@@ -66,3 +74,42 @@ export const setLoadingCalculatePregnancyFidyah = (loadingCalculateFidyah) => ({
   type: SET_LOADING_CALCULATE_PREGNANCY_FIDYAH,
   payload: loadingCalculateFidyah,
 });
+
+export const setActiveIndex = (activeIndex) => ({
+  type: SET_ACTIVE_INDEX,
+  payload: activeIndex,
+});
+
+export const resetPayableData = () => ({
+  type: RESET_PAYABLE_DATA
+})
+
+export const resetPayableHaid = (payload) => ({
+  payload,
+  type: RESET_PAYABLE_HAID
+})
+
+export const resetPayableIllness = (payload) => ({
+  payload,
+  type: RESET_PAYABLE_ILLNESS
+})
+
+export const resetPayablePregnancy = (payload) => ({
+  payload,
+  type: RESET_PAYABLE_PREGNANCY
+})
+
+export const removePayableHaid = (payload) => ({
+  payload,
+  type: REMOVE_PAYABLE_HAID
+})
+
+export const removePayableIllness = (payload) => ({
+  payload,
+  type: REMOVE_PAYABLE_ILLNESS
+})
+
+export const removePayablePregnancy = (payload) => ({
+  payload,
+  type: REMOVE_PAYABLE_PREGNANCY
+})

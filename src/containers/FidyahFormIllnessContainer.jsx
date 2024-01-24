@@ -6,13 +6,18 @@ import { useTranslation } from "react-i18next";
 import HeartBrokenIcon from "@mui/icons-material/HeartBroken";
 import FidyahFormHeader from "@fidyah/components/FidyahForm/FidyahFormHeader";
 import get from "lodash/get";
-import isEmpty from "lodash/isEmpty";
 import { requests } from "@fidyah/utils/requests";
-import { setLoadingCalculateIllnessFidyah, setPayableIllness } from "@fidyah/context/actions";
+import {
+  removePayableIllness,
+  resetPayableIllness,
+  setLoadingCalculateIllnessFidyah,
+  setPayableIllness,
+} from "@fidyah/context/actions";
+import { DEFAULT_PAYABLE_STATE, INIT_PAYABLE } from "@fidyah/utils/constants";
 
 const FidyahFormIllnesContainer = () => {
   const { state, dispatch } = useStore();
-  const { control, watch, getValues, reset: resetForm } = useForm();
+  const { control, watch, reset: resetForm } = useForm();
   const { fields, append, remove, prepend } = useFieldArray({
     control,
     name: "data",
@@ -20,42 +25,49 @@ const FidyahFormIllnesContainer = () => {
 
   const { t } = useTranslation();
 
-  const renderWatchData = fields.map((_, fieldIdx) =>
-    watch(`data[${fieldIdx}].days`)
-  );
+  const handleAddYearForm = () => {
+    const payableIlnessLength = state.payable.haid.length;
+    append({ year: "", days: 0 });
+    dispatch(
+      setPayableIllness({
+        index: payableIlnessLength + 1,
+        data: { id: payableIlnessLength + 1, ...INIT_PAYABLE },
+      })
+    );
+  };
 
-  const handleAddYearForm = () => append({ year: "", days: 0 });
-  const handleDeleteYearForm = (fieldIdx) => remove(fieldIdx);
+  const handleDeleteYearForm = (index) => {
+    remove(index);
+    dispatch(removePayableIllness({ index }));
+  };
 
   const handleResetFormFidyahIllness = () => {
     resetForm();
     prepend({ year: "", days: 0 });
-    dispatch(setPayableIllness(0));
+    dispatch(resetPayableIllness([DEFAULT_PAYABLE_STATE]));
   };
 
-  const handleCalculateFidyahFormIllness = async (values) => {
+  const handleCalculateFidyahFormIllness = async (values, index) => {
     dispatch(setLoadingCalculateIllnessFidyah(true));
 
     try {
       const response = await requests.post(
         "/api/palugada/fidyah/hitung?oldill=1",
-        values
+        [values]
       );
 
-      const totalPayable = get(response.data, "totalBayar", 0);
-      dispatch(setPayableIllness(totalPayable));
+      const responseData = get(response.data, "totalBayar", {});
+
+      const payloadToDispatch = {
+        index,
+        data: { ...responseData, id: index + 1 },
+      };
+
+      dispatch(setPayableIllness(payloadToDispatch));
     } finally {
       dispatch(setLoadingCalculateIllnessFidyah(false));
     }
   };
-
-  useEffect(() => {
-    if (!isEmpty(renderWatchData)) {
-      const getValuesFormData = get(getValues(), "data", []);
-
-      handleCalculateFidyahFormIllness(getValuesFormData);
-    }
-  }, renderWatchData);
 
   useEffect(() => {
     let mounted = true;
@@ -68,19 +80,18 @@ const FidyahFormIllnesContainer = () => {
     return () => (mounted = false);
   }, []);
 
-  const {
-    payable: { illness: illnessTotal } = {},
-  } = state;
+  const { payable: { illness: illnessTotal } = [] } = state;
 
   return (
     <FidyahForm
-      id='illness'
+      id="illness"
       watch={watch}
       fields={fields}
       control={control}
       handleAddYear={handleAddYearForm}
       handleDeleteYear={handleDeleteYearForm}
       handleResetForm={handleResetFormFidyahIllness}
+      handleRequestToApi={handleCalculateFidyahFormIllness}
       headerElement={
         <FidyahFormHeader
           daysCount={false}

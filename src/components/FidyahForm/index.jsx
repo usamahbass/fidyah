@@ -18,6 +18,8 @@ import { generateYears } from "@fidyah/utils/helpers";
 import CounterForm from "../CounterForm/CounterForm";
 import { Controller } from "react-hook-form";
 import ResetIcon from "@mui/icons-material/Refresh";
+import { useStore } from "@fidyah/hooks/useStore";
+import isEmpty from "lodash/isEmpty";
 
 const FidyahForm = ({
   fields,
@@ -27,11 +29,17 @@ const FidyahForm = ({
   headerElement,
   watch,
   handleResetForm,
-  id
+  id,
+  handleRequestToApi
 }) => {
   const { t } = useTranslation();
   const classes = useFidyahFormStyles();
   const watchFormData = watch("data", []);
+
+  const { state } = useStore();
+
+  const payableState = state.payable;
+  const payableStateCurrent = payableState[id];
 
   const watchFormDataYear = watchFormData?.map((data) => data.year);
 
@@ -42,11 +50,8 @@ const FidyahForm = ({
         <Box className={classes.formContent}>
           <Stack spacing={3}>
             {fields.map((field, fieldIdx) => {
-              const watchCurrentYearValue = watch(`data.${fieldIdx}.year`);
               const watchCurrentDayValue = watch(`data.${fieldIdx}.days`);
-
-              const quantityValue =
-                watchCurrentDayValue === 0 ? "-" : watchCurrentDayValue;
+              const watchCurrentYearValue = watch(`data.${fieldIdx}.year`);
 
               return (
                 <Collapse mountOnEnter unmountOnExit key={field.id} in>
@@ -97,7 +102,13 @@ const FidyahForm = ({
                                 id="select-year"
                                 sx={{ fontSize: ".90rem" }}
                                 placeholder={t("general.select")}
-                                onChange={(e) => onChange(e.target.value)}
+                                onChange={(e) => {
+                                  onChange(e.target.value);
+
+                                  if (watchCurrentDayValue) {
+                                    handleRequestToApi({ days: watchCurrentDayValue, year: e.target.value }, fieldIdx);
+                                  }
+                                }}
                                 renderValue={(selected) => {
                                   if (selected.length === 0) {
                                     return t("general.select");
@@ -143,7 +154,10 @@ const FidyahForm = ({
                             render={({ field: { onChange, value } }) => (
                               <CounterForm
                                 value={value}
-                                onChange={onChange}
+                                onChange={(val) => {
+                                  onChange(val);
+                                  handleRequestToApi({ days: val, year: watchCurrentYearValue }, fieldIdx);
+                                }}
                                 disabled={!watchCurrentYearValue}
                               />
                             )}
@@ -169,7 +183,7 @@ const FidyahForm = ({
                             color="primary"
                             variant="h6"
                             fontWeight={800}>
-                            {quantityValue}
+                            {payableStateCurrent?.[fieldIdx]?.qty ?? "0"}
                           </Typography>
                         </FormControl>
 
@@ -195,7 +209,8 @@ const FidyahForm = ({
                             color="primary"
                             variant="h6"
                             fontWeight={800}>
-                            -
+                            {payableStateCurrent?.[fieldIdx]?.bayarFidyah ??
+                              "Rp 0"}
                           </Typography>
                         </FormControl>
                       </Stack>
@@ -231,6 +246,7 @@ const FidyahForm = ({
               variant="contained"
               onClick={handleResetForm}
               startIcon={<ResetIcon />}
+              disabled={isEmpty(payableStateCurrent)}
               sx={{ marginTop: "1rem", fontWeight: 500, borderRadius: "1rem" }}>
               {t("general.reset")}
             </Button>
@@ -249,7 +265,8 @@ FidyahForm.propTypes = {
   headerElement: PropTypes.node,
   watch: PropTypes.func,
   handleResetForm: PropTypes.func,
-  id: PropTypes.string
+  id: PropTypes.string,
+  handleRequestToApi: PropTypes.func
 };
 
 export default FidyahForm;

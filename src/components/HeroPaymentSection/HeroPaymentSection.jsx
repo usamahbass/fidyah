@@ -2,8 +2,6 @@ import Box from "@mui/material/Box";
 import HeroImage from "@fidyah/assets/images/svg/payment.svg";
 import { useHeroPaymentSectionStyles } from "./_styles";
 import { Button, Stack, Typography } from "@mui/material";
-import { DrawerSettings } from "..";
-import { useState } from "react";
 import FaqImage from "@fidyah/assets/images/svg/faq.svg";
 import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
@@ -11,7 +9,6 @@ import PropTypes from "prop-types";
 const HeroPaymentSection = ({ totalPayable }) => {
   const { t } = useTranslation();
   const classes = useHeroPaymentSectionStyles();
-  const [isOpenDrawerSetting, setIsOpenDrawerSetting] = useState(false);
 
   return (
     <Box className={classes.content}>
@@ -37,23 +34,17 @@ const HeroPaymentSection = ({ totalPayable }) => {
           justifyContent="end"
           p="1rem"
           className={classes.overlayBox}>
-          <Typography>{t("hero.sectionBoxTitle")}</Typography>
+          <Typography variant="body2" component="blockquote">{t("general.noteFidyahBaznas")}</Typography>
           <Button
             variant="contained"
             style={{ color: "white", width: "45%", borderRadius: "1rem" }}
-            onClick={() => setIsOpenDrawerSetting(true)}>
-            {t("button.changeHere")}
+            onClick={() => window.open('https://baznas.go.id/fidyah')}>
+            {t("button.learnMore")}
           </Button>
         </Stack>
 
         <img src={FaqImage} alt="faq" className={classes.overlayBoxImage} />
       </Box>
-
-      <DrawerSettings
-        isOpenDrawer={isOpenDrawerSetting}
-        onOpenDrawer={() => setIsOpenDrawerSetting(true)}
-        onCloseDrawer={() => setIsOpenDrawerSetting(false)}
-      />
     </Box>
   );
 };

@@ -11,12 +11,12 @@
   "settings.theme.light": "Terang",
   "settings.theme.dark": "Gelap",
   "form.headerleft.haid.title": "Haid atau Alasan Lainnya",
-  "form.headerleft.haid.description": "Hari menuju Qadha'",
+  "form.headerleft.haid.description": "Jumlah Puasa Yang Perlu di Qadha'",
   "form.headerleft.illness.title": "Penyakit atau Usia Tua",
-  "form.headerleft.illness.description": "Perhitungan bagi yang sakit",
+  "form.headerleft.illness.description": "Jumlah Puasa Yang Perlu di Qadha'",
   "form.headerleft.pregnancy.title": "Ibu Hamil",
-  "form.headerleft.pregnancy.description": "Perhitungan bagi ibu hamil",
-  "form.headerright.title": "Total Hutang",
+  "form.headerleft.pregnancy.description": "Jumlah Puasa Yang Perlu di Qadha'",
+  "form.headerright.title": "Total Biaya Fidyah",
   "general.year": "Tahun",
   "form.yearnotfasting": "Tahun tidak puasa",
   "form.noofdays": "Tidak ada hari",
@@ -35,7 +35,7 @@
   "general.reset": "Atur Ulang",
   "general.install": "Install",
   "general.totalpayablefidyah": "Jumlah fidyah yang harus dibayar",
-  "general.makepayment": "Buat Pembayaran",
+  "general.makepayment": "Salurkan Fidyah",
   "general.or": "atau",
   "general.assets": "Aset",
 
@@ -64,5 +64,7 @@
   "featureSection.illness": "Penyakit / Usia Tua",
   "featureSection.pregnancy": "Ibu Hamil",
 
-  "general.fillPersonalData": "Isi Data Diri"
+  "general.fillPersonalData": "Isi Data Diri",
+  "general.noteFidyahBaznas": "Berdasarkan SK Ketua BAZNAS No. 07 Tahun 2023 tentang Zakat Fitrah dan Fidyah untuk wilayah Ibukota DKI Jakarta Raya dan Sekitarnya, ditetapkan bahwa nilai fidyah dalam bentuk uang sebesar Rp60.000,-/hari/jiwa.",
+  "button.learnMore": "Pelajari lebih lanjut"
 }

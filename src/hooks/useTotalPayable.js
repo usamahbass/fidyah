@@ -1,5 +1,6 @@
-import { rupiahToInt } from "@fidyah/utils/helpers";
-import get from "lodash/get";
+/* eslint-disable no-unsafe-optional-chaining */
+import { sumRupiah } from "@fidyah/utils/helpers";
+import isEmpty from "lodash/isEmpty";
 import { useStore } from "./useStore";
 
 export const useTotalPayable = () => {
@@ -7,14 +8,13 @@ export const useTotalPayable = () => {
     state: { payable: payableState },
   } = useStore();
 
-  const totalHaidPayment = get(payableState?.haid, "bayarFidyah", "0");
-  const totalIlnessPayment = get(payableState?.illness, "bayarFidyah", "0");
-  const totalPregNancyAjram = get(payableState?.pregnancy, "bayarFidyah", "0");
+  const haidState = payableState?.haid;
+  const ilnessState = payableState?.illness;
+  const prenancyState = payableState?.pregnancy;
 
-  const totalPayment =
-    rupiahToInt(totalHaidPayment) +
-    rupiahToInt(totalIlnessPayment) +
-    rupiahToInt(totalPregNancyAjram);
+  const totalHaid = !isEmpty(haidState) ? sumRupiah(...haidState?.map(item => item.bayarFidyah)) : "Rp 0"; 
+  const totalIlnessState = !isEmpty(ilnessState) ? sumRupiah(...ilnessState?.map(item => item.bayarFidyah)) : "Rp 0"; 
+  const totalPregnancyState = !isEmpty(prenancyState) ? sumRupiah(...prenancyState?.map(item => item.bayarFidyah)) : "Rp 0"; 
 
-  return totalPayment;
+  return sumRupiah(totalHaid, totalIlnessState, totalPregnancyState);
 };

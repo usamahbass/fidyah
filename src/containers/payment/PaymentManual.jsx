@@ -2,14 +2,13 @@ import { useTranslation } from "react-i18next";
 import { Stack, TextField, Typography } from "@mui/material";
 import { MuiTelInput } from "mui-tel-input";
 import FidyahLayout from "@fidyah/layouts";
-import { toRupiah } from "@fidyah/utils/helpers";
 import { useTotalPayable } from "@fidyah/hooks/useTotalPayable";
 import { useForm, Controller } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import MakePayment from "@fidyah/components/MakePayment";
 import {
-  resetStoreData,
+  resetPayableData,
   setLoadingCreatePayment,
 } from "@fidyah/context/actions";
 import { useStore } from "@fidyah/hooks/useStore";
@@ -91,7 +90,7 @@ const PaymentManual = () => {
   };
 
   const handleCloseDialogQRIS = () => {
-    dispatch(resetStoreData());
+    dispatch(resetPayableData());
     setIsOpenDialogQRIS(false);
     navigate("/");
   };
@@ -107,7 +106,7 @@ const PaymentManual = () => {
           onMakePayment={handleSubmit(handleMakePayment)}
         />
       }>
-      <HeroPaymentSection totalPayable={toRupiah(totalPayable)} />
+      <HeroPaymentSection totalPayable={totalPayable} />
       <Typography px="1rem" mb="1rem" mt="1rem">{t("general.fillPersonalData")}</Typography>
       <Stack px="1rem" mb="2rem" alignItems="center">
         <Stack spacing={3} width="100%">

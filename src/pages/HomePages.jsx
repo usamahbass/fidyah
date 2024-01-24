@@ -1,6 +1,6 @@
 import { Stack } from "@mui/material";
 import { useEffect } from "react";
-import { setPayableHaid, setPayableIllness } from "@fidyah/context/actions";
+import { resetPayableData } from "@fidyah/context/actions";
 import { useStore } from "@fidyah/hooks/useStore";
 import { useNavigate } from "react-router-dom";
 import FidyahLayout from "@fidyah/layouts";
@@ -20,9 +20,8 @@ const HomePages = () => {
      * clearable state
      * @returns { 0, 0 }
      */
-    dispatch(setPayableHaid(0));
-    dispatch(setPayableIllness(0));
-  }, []);
+    dispatch(resetPayableData());
+  }, [dispatch]);
 
   const handleMakePayment = () => navigate("/pembayaran");
 

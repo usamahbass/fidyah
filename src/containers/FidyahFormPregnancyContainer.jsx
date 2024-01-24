@@ -6,17 +6,18 @@ import { useTranslation } from "react-i18next";
 import PregnantWomanIcon from "@mui/icons-material/PregnantWoman";
 import FidyahFormHeader from "@fidyah/components/FidyahForm/FidyahFormHeader";
 import get from "lodash/get";
-import isEmpty from "lodash/isEmpty";
 import { requests } from "@fidyah/utils/requests";
 import {
+  removePayablePregnancy,
+  resetPayablePregnancy,
   setLoadingCalculatePregnancyFidyah,
-  setPayableIllness,
   setPayablePregNancy,
 } from "@fidyah/context/actions";
+import { DEFAULT_PAYABLE_STATE, INIT_PAYABLE } from "@fidyah/utils/constants";
 
 const FidyahFormPregnancyContainer = () => {
   const { state, dispatch } = useStore();
-  const { control, watch, getValues, reset: resetForm } = useForm();
+  const { control, watch, reset: resetForm } = useForm();
   const { fields, append, remove, prepend } = useFieldArray({
     control,
     name: "data",
@@ -24,42 +25,44 @@ const FidyahFormPregnancyContainer = () => {
 
   const { t } = useTranslation();
 
-  const renderWatchData = fields.map((_, fieldIdx) =>
-    watch(`data[${fieldIdx}].days`)
-  );
+  const handleAddYearForm = () => {
+    const payablePregnancyLength = state.payable.haid.length;
 
-  const handleAddYearForm = () => append({ year: "", days: 0 });
-  const handleDeleteYearForm = (fieldIdx) => remove(fieldIdx);
+    append({ year: "", days: 0 });
+    dispatch(
+      setPayablePregNancy({
+        index: payablePregnancyLength + 1,
+        data: { id: payablePregnancyLength + 1, ...INIT_PAYABLE },
+      })
+    );
+  };
+  const handleDeleteYearForm = (index) => {
+    remove(index);
+    dispatch(removePayablePregnancy({ index }));
+  };
 
   const handleResetFormFidyahIllness = () => {
     resetForm();
     prepend({ year: "", days: 0 });
-    dispatch(setPayableIllness(0));
+    dispatch(resetPayablePregnancy([DEFAULT_PAYABLE_STATE]));
   };
 
-  const handleCalculateFidyahFormIllness = async (values) => {
+  const handleCalculateFidyahFormIllness = async (values, index) => {
     dispatch(setLoadingCalculatePregnancyFidyah(true));
 
     try {
-      const response = await requests.post(
-        "/api/palugada/fidyah/hitung?oldill=1",
-        values
-      );
+      const response = await requests.post("/api/palugada/fidyah/hitung?oldill=0", [values]);
 
-      const totalPayable = get(response.data, "totalBayar", 0);
-      dispatch(setPayablePregNancy(totalPayable));
+
+      const responseData = get(response.data, 'totalBayar', {});
+
+      const payloadToDispatch = { index, data: { ...responseData, id: index + 1 } };
+
+      dispatch(setPayablePregNancy(payloadToDispatch));
     } finally {
       dispatch(setLoadingCalculatePregnancyFidyah(false));
     }
   };
-
-  useEffect(() => {
-    if (!isEmpty(renderWatchData)) {
-      const getValuesFormData = get(getValues(), "data", []);
-
-      handleCalculateFidyahFormIllness(getValuesFormData);
-    }
-  }, renderWatchData);
 
   useEffect(() => {
     let mounted = true;
@@ -83,6 +86,7 @@ const FidyahFormPregnancyContainer = () => {
       handleAddYear={handleAddYearForm}
       handleDeleteYear={handleDeleteYearForm}
       handleResetForm={handleResetFormFidyahIllness}
+      handleRequestToApi={handleCalculateFidyahFormIllness}
       headerElement={
         <FidyahFormHeader
           daysCount={false}

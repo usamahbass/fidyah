@@ -25,7 +25,13 @@ const StyledInput = styled(TextField)({
 
 const CounterForm = ({ onChange, value, disabled }) => {
   const handleChange = (event) => {
-    const result = Math.max(Number(event.target.value), 1);
+    const value = event.target.value.replace(/\D/g, '');
+
+    if (value > 31) {
+      return;
+    }
+
+    const result = Math.max(Number(value), 1);
 
     onChange(result);
   };

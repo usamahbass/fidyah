@@ -5,22 +5,9 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import PaymentsOutlinedIcon from "@mui/icons-material/PaymentsOutlined";
 import Skeleton from "@mui/material/Skeleton";
-import get from "lodash/get";
 import { useFidyahFormStyles } from "./_styles";
-
-// TODO: comment ...
-
-// const handleFormattingTotalPayable = (totalPayable, currency) => {
-//   const isRupiah = currency === CURRENCY.RUPIAH;
-
-//   if (isRupiah) {
-//     const replaceFromRP = replace(totalPayable, "Rp", "");
-//     const toIntegerFromRP = toInteger(replaceFromRP);
-//     return toRupiah(toIntegerFromRP);
-//   }
-
-//   return replace(totalPayable, "Rp", CURRENCY.DOLLAR);
-// };
+import { sumRupiah } from "@fidyah/utils/helpers";
+import isEmpty from "lodash/isEmpty";
 
 const FidyahFormHeader = ({
   icon,
@@ -33,13 +20,31 @@ const FidyahFormHeader = ({
   const { t } = useTranslation();
   const classes = useFidyahFormStyles();
 
-  const totalFidyah = get(totalPayable, "bayarFidyah", 0);
+  // eslint-disable-next-line no-unsafe-optional-chaining
+  const totalFidyah = !isEmpty(totalPayable) ? sumRupiah(...totalPayable?.map(item => item.bayarFidyah)) : "Rp 0";
 
   const checkDaysCount = daysCount === 0 || daysCount || description;
 
   return (
     <Box className={classes.header}>
       <Box className={classes.headerLeft}>
+        <PaymentsOutlinedIcon fontSize="large" color="primary" />
+
+        <Stack>
+          <Typography fontWeight={700} variant="body2">
+            {t("form.headerright.title")}
+          </Typography>
+          {loadingPayable ? (
+            <Skeleton />
+          ) : (
+            <Typography fontWeight={700} color="primary" variant="caption">
+              {totalFidyah}
+            </Typography>
+          )}
+        </Stack>
+      </Box>
+
+      <Box className={classes.headerRight}>
         {icon}
 
         <Stack>
@@ -55,23 +60,6 @@ const FidyahFormHeader = ({
                   {daysCount} {t("general.days")}
                 </Typography>
               )}
-            </Typography>
-          )}
-        </Stack>
-      </Box>
-
-      <Box className={classes.headerRight}>
-        <PaymentsOutlinedIcon fontSize="large" color="primary" />
-
-        <Stack>
-          <Typography fontWeight={700} variant="body2">
-            {t("form.headerright.title")}
-          </Typography>
-          {loadingPayable ? (
-            <Skeleton />
-          ) : (
-            <Typography fontWeight={700} color="primary" variant="caption">
-              {totalFidyah}
             </Typography>
           )}
         </Stack>

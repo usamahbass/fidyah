@@ -76,5 +76,13 @@ export const ASSETS = [
   {
     name: "Storyset",
     link: "https://storyset.com/",
-  }
+  },
 ];
+
+export const INIT_PAYABLE = {
+  bayarFidyah: "Rp 0",
+  qadhaPuasa: 0,
+  qty: 0,
+};
+
+export const DEFAULT_PAYABLE_STATE = { id: 1, ...INIT_PAYABLE };
