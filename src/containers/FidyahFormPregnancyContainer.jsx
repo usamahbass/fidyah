@@ -14,6 +14,7 @@ import {
   setPayablePregNancy,
 } from "@fidyah/context/actions";
 import { DEFAULT_PAYABLE_STATE, INIT_PAYABLE } from "@fidyah/utils/constants";
+import { sumArrayOfObject } from "@fidyah/utils/helpers";
 
 const FidyahFormPregnancyContainer = () => {
   const { state, dispatch } = useStore();
@@ -24,6 +25,8 @@ const FidyahFormPregnancyContainer = () => {
   });
 
   const { t } = useTranslation();
+
+  const currentData = watch("data");
 
   const handleAddYearForm = () => {
     const payablePregnancyLength = state.payable.haid.length;
@@ -75,6 +78,8 @@ const FidyahFormPregnancyContainer = () => {
     return () => (mounted = false);
   }, []);
 
+  const sumTotalDaysInData = sumArrayOfObject(currentData, "days");
+
   const { payable: { pregnancy: pregNancyTotal } = {} } = state;
 
   return (
@@ -89,8 +94,8 @@ const FidyahFormPregnancyContainer = () => {
       handleRequestToApi={handleCalculateFidyahFormIllness}
       headerElement={
         <FidyahFormHeader
-          daysCount={false}
           totalPayable={pregNancyTotal}
+          daysCount={sumTotalDaysInData}
           title={t("form.headerleft.pregnancy.title")}
           loadingPayable={state.loading?.calculateFidyah?.pregnancy}
           description={t("form.headerleft.pregnancy.description")}
