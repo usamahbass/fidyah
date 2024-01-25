@@ -98,7 +98,6 @@ const FidyahFormIllnesContainer = () => {
           totalPayable={illnessTotal}
           title={t("form.headerleft.illness.title")}
           loadingPayable={state.loading?.calculateFidyah?.illness}
-          description={t("form.headerleft.illness.description")}
           icon={<HeartBrokenIcon fontSize="large" color="primary" />}
         />
       }
