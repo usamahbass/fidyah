@@ -5,13 +5,17 @@ import { Button, Stack, Typography, useTheme } from "@mui/material";
 import { DrawerSettings } from "..";
 import { useState } from "react";
 import FaqImage from "@fidyah/assets/images/svg/faq.svg";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import Header from "@fidyah/layouts/Header";
+import { useStore } from "@fidyah/hooks/useStore";
 
 const HeroSection = () => {
   const { t } = useTranslation();
   const classes = useHeroSectionStyles();
   const theme = useTheme();
+
+  const { state } = useStore();
+
   const [isOpenDrawerSetting, setIsOpenDrawerSetting] = useState(false);
 
   return (
@@ -26,7 +30,15 @@ const HeroSection = () => {
           top="100px"
           spacing={3}
           className={classes.contentText}>
-          <Typography width="14rem">{t("hero.title")}</Typography>
+          <Typography width="17rem">
+            <Stack>
+              <Trans i18nKey="header.title" /><br />
+              <Trans
+                i18nKey="hero.title"
+                values={{ amount: state.currentRate }}
+              />
+            </Stack>
+          </Typography>
 
           <Button
             variant="outlined"
@@ -49,7 +61,11 @@ const HeroSection = () => {
           <Typography>{t("hero.sectionBoxTitle")}</Typography>
           <Button
             variant="contained"
-            style={{ color: "white", width: theme.breakpoints.down("xs") ? "45%" : "35%", borderRadius: "1rem" }}
+            style={{
+              color: "white",
+              width: theme.breakpoints.down("xs") ? "45%" : "35%",
+              borderRadius: "1rem",
+            }}
             onClick={() => setIsOpenDrawerSetting(true)}>
             {t("button.changeHere")}
           </Button>

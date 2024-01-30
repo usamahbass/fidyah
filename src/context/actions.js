@@ -7,9 +7,11 @@ import {
   RESET_PAYABLE_ILLNESS,
   RESET_PAYABLE_PREGNANCY,
   RESET_STORE_DATA,
+  RESET_TOTAL_QADHA,
   SET_ACTIVE_INDEX,
   SET_APP_CURRENCY,
   SET_APP_THEME,
+  SET_CURRENT_RATE,
   SET_LOADING_CALCULATE_HAID_FIDYAH,
   SET_LOADING_CALCULATE_ILLNESS_FIDYAH,
   SET_LOADING_CALCULATE_PREGNANCY_FIDYAH,
@@ -18,6 +20,7 @@ import {
   SET_PAYABLE_ILLNESS,
   SET_PAYABLE_PREGNANCY,
   SET_PAYMENT_TYPE,
+  SET_TOTAL_QADHA,
 } from "./types";
 
 export const setAppTheme = (appTheme) => ({
@@ -112,4 +115,19 @@ export const removePayableIllness = (payload) => ({
 export const removePayablePregnancy = (payload) => ({
   payload,
   type: REMOVE_PAYABLE_PREGNANCY
+})
+
+export const setCurrentRate = (payload) => ({
+  payload,
+  type: SET_CURRENT_RATE
+})
+
+export const setTotalQadha = (payload) => ({
+  payload,
+  type: SET_TOTAL_QADHA
+})
+
+export const resetTotalQadha = (payload) => ({
+  payload,
+  type: RESET_TOTAL_QADHA
 })

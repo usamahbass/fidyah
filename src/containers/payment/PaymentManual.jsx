@@ -9,6 +9,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import MakePayment from "@fidyah/components/MakePayment";
 import {
   resetPayableData,
+  resetTotalQadha,
   setLoadingCreatePayment,
 } from "@fidyah/context/actions";
 import { useStore } from "@fidyah/hooks/useStore";
@@ -18,6 +19,8 @@ import QRISDIalog from "@fidyah/components/QRISDialog/QRISDialog";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import HeroPaymentSection from "@fidyah/components/HeroPaymentSection/HeroPaymentSection";
+import { useTotalQadha } from "@fidyah/hooks/useTotalQadha";
+import { useTotalQuantity } from "@fidyah/hooks/useTotalQuantity";
 
 const PaymentManual = () => {
   const { t } = useTranslation();
@@ -28,6 +31,8 @@ const PaymentManual = () => {
   const [phoneInfo, setPhoneInfo] = useState(null);
   const [isOpenDialogQRIS, setIsOpenDialogQRIS] = useState(false);
 
+  const totalQadha = useTotalQadha();
+  const totalQty = useTotalQuantity();
   const totalPayable = useTotalPayable();
 
   const formSchema = yup.object().shape({
@@ -64,17 +69,22 @@ const PaymentManual = () => {
 
     dispatch(setLoadingCreatePayment(true));
 
+    const payload = {
+      ...values,
+      phone_num,
+      total_qty: parseInt(totalQty),
+      total_qadha: parseInt(totalQadha),
+      total_fidyah: parseInt(totalPayable.replace('Rp ', ''))
+    };
+
     requests
-      .post("/api/palugada/fidyah/tambah-user", {
-        ...values,
-        phone_num,
-      })
+      .post("/api/palugada/fidyah/tambah-user", payload)
       .then(() => {
         enqueueSnackbar(
           "Pendaftaran berhasil, silakan bayar menggunakan QRIS !",
           {
             variant: "success",
-            autoHideDuration: 10000,
+            autoHideDuration: 100,
             hideIconVariant: true,
           }
         );
@@ -91,6 +101,8 @@ const PaymentManual = () => {
 
   const handleCloseDialogQRIS = () => {
     dispatch(resetPayableData());
+    dispatch(resetTotalQadha('haid'));
+    dispatch(resetTotalQadha('pregnancy'));
     setIsOpenDialogQRIS(false);
     navigate("/");
   };
