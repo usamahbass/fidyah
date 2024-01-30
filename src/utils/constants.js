@@ -86,3 +86,7 @@ export const INIT_PAYABLE = {
 };
 
 export const DEFAULT_PAYABLE_STATE = { id: 1, ...INIT_PAYABLE };
+
+export const ADMIN_NUMBER = '6281398418530';
+
+export const WA_LINK_LEARN_MORE_DISTRIBUTION = `https://api.whatsapp.com/send/?phone=${ADMIN_NUMBER}&text=Assalamualaikum,%2C+Saya+ingin+dapat+info+lebih+lanjut+mengenai+fidyah&type=phone_number&app_absent=0`;

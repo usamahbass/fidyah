@@ -1,5 +1,5 @@
 {
-  "header.title": "Fidyahku",
+  "header.title": "Fidyah Calculator",
   "header.description": "Make fidyah payment for your missed fasts during past ramadhan",
   "settings.title": "Settings",
   "settings.language.title": "Language",
@@ -38,6 +38,7 @@
   "general.makepayment": "Make Payment",
   "general.or": "or",
   "general.assets": "Assets",
+  "general.totalqadha": "Total Qadha Fasting",
 
   "button.enrollManual": "Manual Payment",
   "button.buy": "Buy",
@@ -46,7 +47,7 @@
   "label.email": "Email",
   "label.noTelp": "Telephone Number",
 
-  "payment.title": "Please enrol with your details to continue with payment.",
+  "payment.title": "Please channel the fidyah payment through Rabithah Alawiyah West Jakarta.",
 
   "inputError.nameRequired": "Name required !",
   "inputError.emailRequired": "Email required !",
@@ -55,7 +56,7 @@
   "inputError.noTelpMin": "Phone number must be at least 9 digits !",
   "inputError.noTelpMax": "Phone number up to 13 digits !",
 
-  "hero.title": "Enjoy various ways to calculate fidyah in the app Fidyahku",
+  "hero.title": "Today's Fidyah Rate {{ amount }} / Day (0.75 Kg / Day)",
   "button.getStarted": "Get started",
   "hero.sectionBoxTitle": "Want to change the language in fidyahku, or change the theme?",
   "button.changeHere": "Change here",
@@ -65,6 +66,7 @@
   "featureSection.pregnancy": "Pregnant Mom",
 
   "general.fillPersonalData": "Fill Personal Data",
-  "general.noteFidyahBaznas": "Based on the Decree of the Chairman of BAZNAS No. 07 of 2023 concerning Zakat Fitrah and Fidyah for the capital city of DKI Jakarta and its surroundings, it is stipulated that the value of fidyah in the form of money is IDR 60,000,-/day/person.",
-  "button.learnMore": "Learn More"
+  "general.noteFidyahBaznas": "Fidyahku allocates an operational donation of 20% of the total funds (fidyah) distributed, used for the fidyah rice distribution team.",
+  "button.learnMore": "Learn More",
+  "button.confirmPayment": "Payment Confirmation"
 }

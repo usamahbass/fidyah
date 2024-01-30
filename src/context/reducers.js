@@ -1,4 +1,4 @@
-import { DEFAULT_PAYABLE_STATE, INIT_PAYABLE, PAYMENT_TYPE } from "@fidyah/utils/constants";
+import { DEFAULT_PAYABLE_STATE, PAYMENT_TYPE } from "@fidyah/utils/constants";
 import {
   REMOVE_PAYABLE_HAID,
   REMOVE_PAYABLE_ILLNESS,
@@ -8,9 +8,11 @@ import {
   RESET_PAYABLE_ILLNESS,
   RESET_PAYABLE_PREGNANCY,
   RESET_STORE_DATA,
+  RESET_TOTAL_QADHA,
   SET_ACTIVE_INDEX,
   SET_APP_CURRENCY,
   SET_APP_THEME,
+  SET_CURRENT_RATE,
   SET_LOADING_CALCULATE_HAID_FIDYAH,
   SET_LOADING_CALCULATE_ILLNESS_FIDYAH,
   SET_LOADING_CALCULATE_PREGNANCY_FIDYAH,
@@ -19,11 +21,17 @@ import {
   SET_PAYABLE_ILLNESS,
   SET_PAYABLE_PREGNANCY,
   SET_PAYMENT_TYPE,
+  SET_TOTAL_QADHA,
 } from "./types";
 
 export const initialState = {
   theme: "light",
   currency: "$",
+  totalQadha: {
+    haid: '0',
+    pregnancy: '0'
+  },
+  currentRate: '0',
   payable: {
     haid: [DEFAULT_PAYABLE_STATE],
     illness: [DEFAULT_PAYABLE_STATE],
@@ -172,6 +180,12 @@ export const reducer = (state = initialState, action) => {
         ...state,
         payable: { ...state.payable, pregnancy: action.payload },
       };
+    case SET_CURRENT_RATE:
+      return { ...state, currentRate: action.payload }
+    case SET_TOTAL_QADHA:
+      return { ...state, totalQadha: { ...state.totalQadha, [action.payload.keyState]: action.payload.keyValue } }
+    case RESET_TOTAL_QADHA:
+      return { ...state, totalQadha: { ...state.totalQadha, [action.payload]: '0' } }
     default:
       return state;
   }

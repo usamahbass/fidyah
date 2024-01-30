@@ -11,8 +11,10 @@ import { requests } from "@fidyah/utils/requests";
 import {
   removePayableHaid,
   resetPayableHaid,
+  resetTotalQadha,
   setLoadingCalculateHaidFidyah,
   setPayableHaid,
+  setTotalQadha,
 } from "@fidyah/context/actions";
 import { DEFAULT_PAYABLE_STATE, INIT_PAYABLE } from "@fidyah/utils/constants";
 
@@ -69,6 +71,7 @@ const FidyahFormHaidContainer = () => {
   const handleResetFormFidyahHaid = () => {
     resetForm();
     prepend({ year: "", days: 0 });
+    dispatch(resetTotalQadha('haid'));
     dispatch(resetPayableHaid([DEFAULT_PAYABLE_STATE]));
   };
 
@@ -84,6 +87,14 @@ const FidyahFormHaidContainer = () => {
   }, []);
 
   const sumTotalDaysInData = sumArrayOfObject(currentData, "days");
+
+  useEffect(() => {
+    if (sumTotalDaysInData) {
+      dispatch(
+        setTotalQadha({ keyState: "haid", keyValue: sumTotalDaysInData })
+      );
+    }
+  }, [sumTotalDaysInData, dispatch]);
 
   const { payable: { haid: haidTotal } = [] } = state;
 

@@ -10,8 +10,10 @@ import { requests } from "@fidyah/utils/requests";
 import {
   removePayablePregnancy,
   resetPayablePregnancy,
+  resetTotalQadha,
   setLoadingCalculatePregnancyFidyah,
   setPayablePregNancy,
+  setTotalQadha,
 } from "@fidyah/context/actions";
 import { DEFAULT_PAYABLE_STATE, INIT_PAYABLE } from "@fidyah/utils/constants";
 import { sumArrayOfObject } from "@fidyah/utils/helpers";
@@ -47,6 +49,7 @@ const FidyahFormPregnancyContainer = () => {
   const handleResetFormFidyahIllness = () => {
     resetForm();
     prepend({ year: "", days: 0 });
+    dispatch(resetTotalQadha('pregnancy'));
     dispatch(resetPayablePregnancy([DEFAULT_PAYABLE_STATE]));
   };
 
@@ -81,6 +84,14 @@ const FidyahFormPregnancyContainer = () => {
   const sumTotalDaysInData = sumArrayOfObject(currentData, "days");
 
   const { payable: { pregnancy: pregNancyTotal } = {} } = state;
+
+  useEffect(() => {
+    if (sumTotalDaysInData) {
+      dispatch(
+        setTotalQadha({ keyState: "pregnancy", keyValue: sumTotalDaysInData })
+      );
+    }
+  }, [sumTotalDaysInData, dispatch]);
 
   return (
     <FidyahForm
