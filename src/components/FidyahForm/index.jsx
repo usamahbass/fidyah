@@ -238,6 +238,7 @@ const FidyahForm = ({
                 marginTop: "1rem",
                 fontWeight: 500,
                 color: "white",
+                borderRadius: '1rem'
               }}>
               {t("general.addyear")}
             </Button>
@@ -249,7 +250,7 @@ const FidyahForm = ({
               startIcon={<ResetIcon />}
               className={classes.actionReset}
               disabled={isEmpty(payableStateCurrent)}
-              sx={{ marginTop: "1rem", fontWeight: 500 }}>
+              sx={{ marginTop: "1rem", fontWeight: 500, borderRadius: '1rem' }}>
               {t("general.reset")}
             </Button>
           </Stack>
