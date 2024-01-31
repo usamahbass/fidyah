@@ -44,7 +44,7 @@ const FidyahForm = ({
   const watchFormDataYear = watchFormData?.map((data) => data.year);
 
   return (
-    <Box px="1rem" id={id}>
+    <Box px="1rem" id={id} sx={{ paddingBottom: id === 'pregnancy' ? '2rem' : '0' }}>
       <Box className={classes.container}>
         {headerElement}
         <Box className={classes.formContent}>
