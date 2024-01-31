@@ -53,5 +53,16 @@ export const useFidyahFormStyles = makeStyles((theme) => {
     formLabel: {
       color: theme.palette.secondary[theme.palette.mode],
     },
+    // stackAction: {
+    //   [theme.breakpoints.down("sm")]: {
+    //     flexDirection: "column"
+    //   }
+    // },
+    // actionAddYear: {
+    //   [theme.breakpoints.down("sm")]: {
+    //     order: 2,
+    //     width: '100%'
+    //   }
+    // }
   };
 });

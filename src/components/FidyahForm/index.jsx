@@ -226,17 +226,19 @@ const FidyahForm = ({
           <Stack
             direction="row"
             alignItems="center"
+            className={classes.stackAction}
             justifyContent="space-between">
             <Button
               color="warning"
               variant="contained"
               onClick={handleAddYear}
+              className={classes.actionAddYear}
               startIcon={<AddIcon />}
               sx={{
                 marginTop: "1rem",
                 fontWeight: 500,
-                borderRadius: "1rem",
                 color: "white",
+                borderRadius: '1rem'
               }}>
               {t("general.addyear")}
             </Button>
@@ -246,8 +248,9 @@ const FidyahForm = ({
               variant="contained"
               onClick={handleResetForm}
               startIcon={<ResetIcon />}
+              className={classes.actionReset}
               disabled={isEmpty(payableStateCurrent)}
-              sx={{ marginTop: "1rem", fontWeight: 500, borderRadius: "1rem" }}>
+              sx={{ marginTop: "1rem", fontWeight: 500, borderRadius: '1rem' }}>
               {t("general.reset")}
             </Button>
           </Stack>
