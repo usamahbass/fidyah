@@ -10,7 +10,7 @@ export const useHeroSectionStyles = makeStyles((theme) => ({
   },
   contentImage: {
     objectFit: 'cover',
-    width: '60%',
+    width: '55%',
     maxHeight: '400px',
     position: 'absolute',
     right: '0',

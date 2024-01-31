@@ -1,5 +1,5 @@
 import Box from "@mui/material/Box";
-import HeroImage from "@fidyah/assets/images/svg/calculator.svg";
+import HeroImage from "@fidyah/assets/images/hero-img.png";
 import { useHeroSectionStyles } from "./_styles";
 import { Button, Stack, Typography, useTheme } from "@mui/material";
 import { DrawerSettings } from "..";
@@ -30,12 +30,13 @@ const HeroSection = () => {
           top="100px"
           spacing={3}
           className={classes.contentText}>
-          <Typography width="17rem">
+          <Typography width="18.5rem">
             <Stack>
               <Trans i18nKey="header.title" /><br />
               <Trans
                 i18nKey="hero.title"
-                values={{ amount: state.currentRate }}
+                style={{ lineHeight: '100rem' }}
+                values={{ amount: state.currentRate.replace(',-', '') }}
               />
             </Stack>
           </Typography>

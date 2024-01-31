@@ -6,6 +6,7 @@ import { useStore } from "@fidyah/hooks/useStore";
 import PropTypes from "prop-types";
 import { LoadingButton as Button } from "@mui/lab";
 import { useTotalQadha } from "@fidyah/hooks/useTotalQadha";
+import { rupiahToInt } from "@fidyah/utils/helpers";
 
 const MakePayment = ({ onMakePayment, title, isLoadingButton }) => {
   const { state } = useStore();
@@ -24,8 +25,9 @@ const MakePayment = ({ onMakePayment, title, isLoadingButton }) => {
     pregnancy: false,
   };
 
+  const disabledButton = rupiahToInt(totalPayable) === 0;
   const isLoading = isLoadingHaid || isLoadingIllness || isLoadingPregnancy;
-
+  
   return (
     <Stack
       pt="2rem"
@@ -74,7 +76,7 @@ const MakePayment = ({ onMakePayment, title, isLoadingButton }) => {
           variant="contained"
           onClick={onMakePayment}
           loading={isLoadingButton}
-          disabled={totalPayable === 0}
+          disabled={disabledButton}
           sx={{ color: "white", padding: ".65rem" }}
           endIcon={<ArrowForwardIcon />}>
           {t(title)}

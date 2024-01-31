@@ -20,7 +20,7 @@ const Header = () => {
 
   return (
     <Box py="0.75rem" px="1rem" className={classes.header}>
-      <img src="/vite.svg" alt="logo" />
+      <img width={100} src="/logo.png" alt="logo" />
 
       <Stack direction="row" spacing={1}>
         <InstallButton />
