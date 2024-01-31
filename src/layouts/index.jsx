@@ -16,7 +16,7 @@ const FidyahLayout = ({ children, title, withBackHeader, bottomNavigation }) => 
       <Box className={classes.container}>
         <Box
           position="relative"
-          top={withBackHeader ? "50px" : "0"}
+          top={withBackHeader ? "60px" : "0"}
           pb="12rem"
           height="100%">
           {children}

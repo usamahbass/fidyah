@@ -120,7 +120,7 @@ const PaymentManual = () => {
       }>
       <HeroPaymentSection totalPayable={totalPayable} />
       <Typography px="1rem" mb="1rem" mt="1rem">{t("general.fillPersonalData")}</Typography>
-      <Stack px="1rem" mb="2rem" alignItems="center">
+      <Stack px="1rem" pb="3.8rem" mb="2rem" alignItems="center">
         <Stack spacing={3} width="100%">
           <Controller
             name="name"
