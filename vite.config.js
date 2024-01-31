@@ -14,7 +14,7 @@ export default defineConfig({
     VitePWA({
       registerType: "autoUpdate",
       devOptions: {
-        enabled: false,
+        enabled: true,
       },
       manifest: {
         name: "Fidyahku",
@@ -25,44 +25,72 @@ export default defineConfig({
         theme_color: "#5DC3B2",
         icons: [
           {
-            src: "images/icons/icon-72x72.png",
-            sizes: "72x72",
-            type: "image/png",
-          },
-          {
-            src: "images/icons/icon-96x96.png",
-            sizes: "96x96",
-            type: "image/png",
-          },
-          {
-            src: "images/icons/icon-128x128.png",
-            sizes: "128x128",
-            type: "image/png",
-          },
-          {
-            src: "images/icons/icon-144x144.png",
-            sizes: "144x144",
-            type: "image/png",
-          },
-          {
-            src: "images/icons/icon-152x152.png",
-            sizes: "152x152",
-            type: "image/png",
-          },
-          {
-            src: "images/icons/icon-192x192.png",
+            src: "android-chrome-192x192.png",
             sizes: "192x192",
             type: "image/png",
           },
           {
-            src: "images/icons/icon-384x384.png",
-            sizes: "384x384",
-            type: "image/png",
-          },
-          {
-            src: "images/icons/icon-512x512.png",
+            src: "android-chrome-512x512.png",
             sizes: "512x512",
             type: "image/png",
+          },
+        ],
+        screenshots: [
+          {
+            src: "ss-1.jpg",
+            sizes: "1080x1920",
+            type: "image/jpg",
+            form_factor: "wide",
+            label: "Homescreen Fidyahku",
+          },
+          {
+            src: "ss-2.jpg",
+            sizes: "1080x1920",
+            type: "image/jpg",
+            form_factor: "wide",
+            label: "Bayar Fidyah Haid",
+          },
+          {
+            src: "ss-3.jpg",
+            sizes: "1080x1920",
+            type: "image/jpg",
+            form_factor: "wide",
+            label: "Salurkan Fidyah",
+          },
+           {
+            src: "ss-4.jpg",
+            sizes: "1080x1920",
+            type: "image/jpg",
+            form_factor: "wide",
+            label: "Salurkan Fidyah",
+          },
+          {
+            src: "ss-1.jpg",
+            sizes: "1080x1920",
+            type: "image/jpg",
+            form_factor: "narrow",
+            label: "Homescreen Fidyahku",
+          },
+          {
+            src: "ss-2.jpg",
+            sizes: "1080x1920",
+            type: "image/jpg",
+            form_factor: "narrow",
+            label: "Bayar Fidyah Haid",
+          },
+          {
+            src: "ss-3.jpg",
+            sizes: "1080x1920",
+            type: "image/jpg",
+            form_factor: "narrow",
+            label: "Salurkan Fidyah",
+          },
+           {
+            src: "ss-4.jpg",
+            sizes: "1080x1920",
+            type: "image/jpg",
+            form_factor: "narrow",
+            label: "Salurkan Fidyah",
           },
         ],
       },
