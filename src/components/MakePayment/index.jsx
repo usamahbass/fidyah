@@ -27,7 +27,7 @@ const MakePayment = ({ onMakePayment, title, isLoadingButton }) => {
 
   const disabledButton = rupiahToInt(totalPayable) === 0;
   const isLoading = isLoadingHaid || isLoadingIllness || isLoadingPregnancy;
-  
+
   return (
     <Stack
       pt="2rem"
@@ -43,20 +43,7 @@ const MakePayment = ({ onMakePayment, title, isLoadingButton }) => {
         backgroundColor: "white",
       }}>
       <Stack spacing={3}>
-        <Stack spacing={2}>
-          <Stack spacing={1}>
-            <Typography variant="body2" fontWeight={500}>
-              {t("general.totalqadha")}
-            </Typography>
-
-            {isLoading ? (
-              <Skeleton sx={{ width: "150px" }} />
-            ) : (
-              <Typography fontSize="1.5rem" color="primary" fontWeight={700}>
-                {String(totalQadha)}
-              </Typography>
-            )}
-          </Stack>
+        <Stack justifyContent='space-between' direction="row" spacing={2}>
           <Stack spacing={1}>
             <Typography variant="body2" fontWeight={500}>
               {t("general.totalpayablefidyah")}
@@ -67,6 +54,19 @@ const MakePayment = ({ onMakePayment, title, isLoadingButton }) => {
             ) : (
               <Typography fontSize="1.5rem" color="primary" fontWeight={700}>
                 {totalPayable}
+              </Typography>
+            )}
+          </Stack>
+          <Stack direction='row' alignItems='start' spacing={1}>
+            <Typography variant="caption" fontWeight={500}>
+              {t("general.totalqadha")}
+            </Typography>
+
+            {isLoading ? (
+              <Skeleton sx={{ width: "150px" }} />
+            ) : (
+              <Typography fontSize="1.5rem" color="primary" sx={{ position: 'relative', bottom: '7px' }} fontWeight={700}>
+                {String(totalQadha)}
               </Typography>
             )}
           </Stack>

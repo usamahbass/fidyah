@@ -72,9 +72,9 @@ const PaymentManual = () => {
     const payload = {
       ...values,
       phone_num,
-      total_qty: parseInt(totalQty),
-      total_qadha: parseInt(totalQadha),
-      total_fidyah: parseInt(totalPayable.replace('Rp ', ''))
+      total_fidyah: totalPayable,
+      total_qty: String(totalQty),
+      total_qadha: String(totalQadha)
     };
 
     requests
